@@ -1,0 +1,480 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mis Calificaciones</title>
+<style>
+:root{--g:#10a43a;--gd:#06621c;--o:#ff8a00;--y:#ffd23f;--r:#ff5c8a;--b:#35b6ff;--p:#8b5cf6;--tx:#13302a;--mu:#5b6f66;--bd:#cfe9d6;--mc:#0e9a22;box-sizing:border-box}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font:15px/1.4 "Segoe UI",system-ui,Arial,sans-serif;min-height:100vh;background-color:#effaf2;background-image:linear-gradient(180deg,#e6f7ff 0,#f3fff1 38%,#fff8e4 100%);background-size:100% 100%;background-attachment:fixed}
+#app{max-width:1180px;margin:0 auto;padding:16px 18px 40px}
+.dnib{position:absolute;top:10px;right:14px;z-index:20;text-align:right}.dnib .r{display:flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--bd);border-radius:14px;padding:4px 6px 4px 12px;box-shadow:0 3px 10px rgba(0,60,20,.10)}.dnib label{font-weight:900;font-size:12px;color:var(--gd);letter-spacing:.4px}.dnib input{width:112px;border:0;padding:5px 4px;font-weight:800;font-size:15px;letter-spacing:1px;outline:none;background:transparent}.dnib .go{border:0;border-radius:10px;background:var(--g);color:#fff;font-weight:900;padding:6px 11px;cursor:pointer}.dnib #le{font-size:12px;font-weight:700;margin-top:4px;max-width:260px;margin-left:auto;min-height:0}
+button,select,input{font:inherit}
+select,input{border:1px solid var(--bd);border-radius:10px;padding:7px 10px;background:#fff;color:var(--tx)}
+.pv{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:#fff8d6;border:2px dashed #e5b800;border-radius:12px;padding:6px 12px;margin-bottom:12px;font-size:12px;font-weight:700;color:#7a5d00}
+.hd{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-bottom:18px}
+.tt{background:linear-gradient(135deg,#0fb43f,#06821f);color:#fff;font-weight:900;font-size:19px;letter-spacing:.6px;padding:22px 30px;border-radius:20px;box-shadow:0 6px 0 #05591a,0 12px 22px rgba(6,98,28,.25);text-align:center;line-height:1.15}
+.tt span{display:block;font-size:26px;margin-bottom:2px;animation:bn 2.2s ease-in-out infinite}
+@keyframes bn{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-5px) rotate(6deg)}}
+.nm h1{margin:0;font-size:30px;line-height:1.1;text-transform:uppercase;letter-spacing:.3px}
+.nm .sb{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--mu);font-size:13px}
+.chip{border-radius:20px;padding:4px 12px;font-weight:800;font-size:12px}
+.c1{background:#d3f5da;color:var(--gd)}.c2{background:#fff0bf;color:#8a5a00}
+.ph{position:relative;width:112px;height:112px;flex:none}
+.ph img,.ph .ini{width:112px;height:112px;border-radius:26px;object-fit:cover;border:5px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.ph .ini{display:grid;place-items:center;font-size:38px;font-weight:900;color:#fff}
+.ph:after{content:"★";color:#ffb400;text-shadow:0 1px 0 #c98a00;position:absolute;right:-8px;top:-12px;font-size:32px}
+.bd{display:grid;grid-template-columns:200px 1px 1fr;gap:20px}
+.dv{background:linear-gradient(#cfe0d4,#cfe0d4)}
+.nav{display:flex;flex-direction:column;gap:10px;padding-top:6px}
+.nav button{display:flex;align-items:center;justify-content:space-between;gap:6px;border:0;border-radius:30px;padding:11px 14px;color:#fff;font-weight:900;font-size:12px;letter-spacing:.3px;cursor:pointer;text-align:left;background:var(--c);box-shadow:0 4px 0 rgba(0,0,0,.22);transition:.15s}
+.nav button:hover{transform:translateY(-2px)}
+.nav button.on{transform:scale(1.06);outline:4px solid #fff;box-shadow:0 0 0 7px var(--c),0 8px 16px rgba(0,0,0,.25)}
+.nav button b{background:rgba(255,255,255,.92);color:var(--c);border-radius:12px;padding:1px 8px;font-size:11px}
+.nav .gen{border-radius:12px;margin-top:14px;padding:14px;font-size:12.5px}
+.mp{min-width:0}
+.mb{background:var(--mc);color:#fff;font-weight:900;letter-spacing:.6px;padding:11px 20px;border-radius:16px 16px 0 0;font-size:17px;display:flex;gap:10px;align-items:center}
+.box{background:#fff;border:3px solid var(--mc);border-top:0;border-radius:0 0 18px 18px;padding:14px;overflow-x:auto;margin-bottom:18px;box-shadow:0 6px 16px rgba(0,60,20,.08)}
+table.nt{border-collapse:separate;border-spacing:6px;width:100%;min-width:640px}
+.nt th{font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--mc);background:var(--mt);border-radius:10px;padding:9px 4px;text-align:center}
+.nt td{text-align:center;border-radius:12px;padding:10px 4px;font-weight:900;font-size:17px;border:2px dashed #d5e3d9;color:#9aa8a0;background:#fff}
+.nt td.hi{background:#d3f5da;color:var(--gd);border:2px solid #9be3ad}.nt td.md{background:#fff2b8;color:#8a5a00;border:2px solid #f3d65c}.nt td.lo{background:#ffe1cc;color:#c2410c;border:2px solid #ffb98a}
+.nt td.fv{background:#d3f5da;color:var(--gd);border:2px solid #9be3ad}.nt td.ct{background:#ffd9e0;color:#be123c;border:2px solid #ffa8b9}.nt td.pc{background:#d8f1ff;color:#0369a1;border:2px solid #9bd7f5}.nt td.to{background:#bff1f7;color:#0e7490;border:2px solid #6fd8e6;font-size:21px}
+.card{background:#fff;border:2px solid var(--bd);border-radius:18px;padding:14px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,60,20,.06)}
+.card h3{margin:0 0 6px;font-size:14px;color:var(--mc);letter-spacing:.3px}
+.cht{text-align:center}.cht svg{width:100%;max-width:560px;height:auto}
+.pr{display:grid;grid-template-columns:170px minmax(150px,230px) 1fr;gap:16px;align-items:center}
+.pie svg{width:150px;height:150px;display:block;margin:auto}
+.lg{font-size:11px;margin-top:6px}.lg div{display:flex;gap:6px;align-items:center;margin:2px 0}.lg i{width:10px;height:10px;border-radius:3px;flex:none}
+.pl{border-radius:16px;padding:12px;text-align:center}
+.pl b{display:block;font-size:12px;letter-spacing:.3px}.pl strong{display:block;font-size:46px;line-height:1.05;margin-top:4px}
+.pl.f{background:#d3f5da;color:var(--gd);border:2px solid #9be3ad}.pl.c{background:#ffd9e0;color:#be123c;border:2px solid #ffa8b9}
+.tw{max-height:150px;overflow:auto;border:1px solid #e3eee6;border-radius:12px}
+table.mt{border-collapse:collapse;width:100%;font-size:11.5px}.mt th{background:#eef8f1;color:var(--gd);padding:5px 6px;position:sticky;top:0;text-transform:uppercase;font-size:10px}.mt td{padding:5px 6px;border-top:1px solid #edf3ee;text-align:center}.mt td.l{text-align:left}
+.sg{border-radius:20px;padding:2px 8px;font-weight:800}.sg.f{background:#d3f5da;color:var(--gd)}.sg.c{background:#ffd9e0;color:#be123c}
+.msg{border-radius:20px;padding:18px 24px;text-align:center;border:3px solid;position:relative}
+.msg .tag{position:absolute;top:-13px;left:22px;background:#fff;border:2px solid;border-radius:14px;padding:1px 12px;font-size:12px;font-weight:900}
+.msg .mi{font-size:34px;line-height:1}.msg b{display:block;font-size:18px;text-transform:uppercase;letter-spacing:.4px;margin:4px 0}.msg p{margin:4px 0 0;font-size:15px;font-weight:700}
+.msg.great{background:#d9f7e0;border-color:#4cc96a;color:#0a5a22}.msg.good{background:#fff3c4;border-color:#f0cf55;color:#5b4300}.msg.warn{background:#ffe3cc;border-color:#ff9f55;color:#8a3a00}.msg.info{background:#dff3ff;border-color:#7cc8f2;color:#0b4f75}
+.gt{width:100%;min-width:0;border-collapse:separate;border-spacing:6px}
+.gt th{background:#fff1d6;color:#b45309;border-radius:10px;padding:9px 4px;font-size:11px;text-transform:uppercase}
+.gt td{text-align:center;border-radius:12px;padding:9px 4px;font-weight:900;font-size:16px;background:#fff;border:2px solid #f2e6cf}
+.gt td.n{text-align:left;color:#fff;padding-left:14px;font-size:13px;border:0}
+.nf{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px;background:linear-gradient(135deg,#fff3c4,#ffe0a3);border:3px solid #ffbf3f;border-radius:18px;padding:12px;font-weight:900;color:#8a4a00}.nf strong{font-size:44px;color:#c2410c}
+.cf{position:fixed;top:-20px;width:10px;height:14px;z-index:50;animation:fl 3.2s linear forwards;pointer-events:none}
+@keyframes fl{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+.out{background:#fff;border:2px solid var(--bd);border-radius:20px;padding:2px 12px;font-weight:800;color:var(--mu);cursor:pointer}.lf label{display:block;text-align:left;font-weight:800;font-size:12px;color:var(--mu);margin-top:10px}.setup{max-width:560px;margin:60px auto;text-align:center}.setup input{width:100%;margin:10px 0}.bt{border:0;border-radius:14px;padding:11px 18px;font-weight:900;color:#fff;background:var(--g);cursor:pointer;box-shadow:0 4px 0 #0a6a24}.bt.o{background:var(--o);box-shadow:0 4px 0 #b45309}
+@media(max-width:860px){.hd{grid-template-columns:1fr auto}.tt{grid-column:1/-1;padding:12px;font-size:16px}.tt span{display:inline;margin-right:8px}.bd{grid-template-columns:1fr}.dv{display:none}.nav{flex-direction:row;overflow-x:auto;padding:8px 4px 14px}.nav button{flex:none}.nav .gen{margin-top:0}.pr{grid-template-columns:1fr}.nm h1{font-size:22px}.ph,.ph img,.ph .ini{width:84px;height:84px}}
+
+.pd{padding:8px;margin-bottom:12px}.pd summary{display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none;border-radius:14px;padding:10px 14px;font-weight:900;letter-spacing:.3px;user-select:none}
+.pd summary::-webkit-details-marker{display:none}
+.pd.f summary{background:#d3f5da;color:var(--gd);border:2px solid #9be3ad}.pd.c summary{background:#ffd9e0;color:#be123c;border:2px solid #ffa8b9}
+.pd .pt{flex:1;font-size:13px}.pd summary strong{font-size:26px;line-height:1}
+.pd .vd{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;opacity:.85}
+.pd .v2,.pd[open] .v1{display:none}.pd[open] .v2{display:inline}
+.pd .ar{width:9px;height:9px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg);margin:-4px 2px 0 0;transition:transform .2s}
+.pd[open] .ar{transform:rotate(-135deg);margin-top:4px}
+.pr2{display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:center;margin-top:12px}
+.lt{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:24px;font-weight:900;color:#fff;margin:6px auto 2px}
+.lt.s{width:28px;height:28px;font-size:15px;margin:0}
+.lt.P{background:#10a43a}.lt.T{background:#e11d48}.lt.F{background:#111}.lt.A{background:#8a949c}.lt.N{background:#fff;color:#9aa8a0;border:2px dashed #cfd8d2}
+.ac{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.kc{display:flex;align-items:center;gap:8px;border-radius:14px;padding:6px 12px 6px 8px;font-weight:800;font-size:13px;background:#fff;border:2px solid var(--bd)}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px 10px;padding-top:8px}
+.dy{position:relative;border:2px solid #e3eee6;border-radius:16px;padding:10px 4px 8px;text-align:center;background:#fff}
+.dy small{display:block;font-size:11px;font-weight:800;color:var(--mu);text-transform:uppercase}.dy .dt{font-weight:900;font-size:14px}
+.dy .sm{font-size:10.5px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 4px}
+.dy.hoy{border-color:#2563eb;background:#eef4ff;box-shadow:0 0 0 4px #bfd4ff}
+.dy.hoy:after{content:"HOY";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#2563eb;color:#fff;border-radius:10px;padding:0 9px;font-size:10px;font-weight:900}
+@media(max-width:860px){.pr2{grid-template-columns:1fr}}
+
+.sx{border:2px solid var(--bd);border-radius:16px;padding:12px;margin-bottom:12px;background:#fcfffd}
+.sx h4{margin:0 0 10px;font-size:12.5px;letter-spacing:.4px;color:var(--mc);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.sx h4 small{color:var(--mu);font-weight:700;font-size:11px;letter-spacing:0}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(76px,1fr));gap:8px}.cg.two{grid-template-columns:1fr 1fr}
+.cl{display:flex;flex-direction:column;gap:5px;min-width:0}
+.cl .lb{background:var(--mt);color:var(--mc);border-radius:10px;padding:6px 2px;font-size:10.5px;font-weight:800;text-transform:uppercase;text-align:center;line-height:1.1}
+.cl .vl{border-radius:12px;padding:10px 2px;font-weight:900;font-size:18px;text-align:center;border:2px dashed #d5e3d9;color:#9aa8a0;background:#fff}
+.vl.hi,.vl.fv{background:#d3f5da;color:var(--gd);border:2px solid #9be3ad}.vl.md{background:#fff2b8;color:#8a5a00;border:2px solid #f3d65c}.vl.lo{background:#ffe1cc;color:#c2410c;border:2px solid #ffb98a}.vl.ct{background:#ffd9e0;color:#be123c;border:2px solid #ffa8b9}
+.rs{display:flex;justify-content:space-between;align-items:center;margin-top:10px;border-radius:14px;padding:8px 16px;font-weight:900;font-size:12.5px;letter-spacing:.5px;background:#d8f1ff;color:#0369a1;border:2px solid #9bd7f5}.rs b{font-size:26px;line-height:1}
+.fin{display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:18px;padding:14px 18px;background:var(--mc);color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.22)}.fin small{display:block;font-weight:900;font-size:12.5px;letter-spacing:.5px}.fin span{display:block;font-size:11.5px;font-weight:700;opacity:.9;margin-top:2px}.fin strong{font-size:42px;line-height:1;white-space:nowrap}
+@media(max-width:860px){#app{padding:12px 12px 30px}.box{padding:10px}.sx{padding:10px}.cg{grid-template-columns:repeat(auto-fit,minmax(58px,1fr));gap:6px}.cg.two{grid-template-columns:1fr 1fr}.cl .vl{font-size:16px;padding:9px 0}.fin{padding:12px 14px}.fin strong{font-size:36px}.mb{font-size:15px;padding:10px 14px}.card{padding:10px}}
+
+.emoji{height:1.15em;width:1.15em;vertical-align:-.2em;display:inline-block}
+.mi .emoji{height:1em;width:1em}.tt span .emoji{height:1.1em;width:1.1em}.nav .emoji{height:1.2em;width:1.2em}
+.pw{position:relative}.pw input{padding-right:46px}.eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;color:var(--mu);padding:4px;line-height:0}.eye svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.eye .sl{display:none}.eye.on .sl{display:block}.eye.on{color:var(--g)}
+.lf input{margin:4px 0}.lg0{text-align:left;font-weight:800;font-size:12px;color:var(--mu);margin-top:10px}
+
+.bn{background:linear-gradient(135deg,#0fb43f,#06821f);color:#fff;text-align:center;font-weight:900;letter-spacing:1.2px;font-size:18px;padding:12px 16px;box-shadow:0 3px 10px rgba(0,60,20,.18)}
+.lf select{width:100%;margin:4px 0;font-weight:700}
+@media(max-width:860px){.bn{font-size:15px;padding:10px}}
+/* ===== Ajustes v14 ===== */
+.nm h1{font-size:42px}
+.ph,.ph img,.ph .ini{width:156px;height:156px}.ph img,.ph .ini{border-radius:32px;border-width:6px}.ph .ini{font-size:52px}
+.chip{font-size:13px;padding:5px 14px}.c3{background:#dbeafe;color:#1e40af}
+.bn{position:relative}
+.vb{position:absolute;left:12px;top:50%;transform:translateY(-50%);background:#fff;color:var(--gd);text-decoration:none;font-size:13px;letter-spacing:.3px;padding:7px 14px;border-radius:20px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.vb:active{transform:translateY(-50%) scale(.96)}
+.sx.pa{--sc:#2563eb;border-color:#bfd4ff;background:#f6f9ff}
+.sx.rf{--sc:#f58a07;border-color:#ffd299;background:#fffaf2}
+.sx h4{background:var(--sc);color:#fff;border-radius:10px;padding:8px 14px;font-size:13.5px;margin-bottom:12px}.sx h4 small{color:rgba(255,255,255,.88)}
+.sx.rf .rs{background:#ffe9cc;color:#b45309;border-color:#ffc680}
+.sx.pa .rs{background:#dbeafe;color:#1e40af;border-color:#93b8f7}
+.rs b{font-size:30px}
+.cl .lb{background:var(--sc);color:#fff;font-size:13px;padding:8px 2px;letter-spacing:.5px}
+.cl .vl{font-size:28px;padding:16px 2px}
+.pp{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.pp .sg{font-size:11.5px;padding:3px 10px;font-weight:700}.pp .sg b{font-weight:900;margin-left:2px}
+.cur{display:none}
+.cur .ar2{width:9px;height:9px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg);margin:-4px 2px 0 4px;transition:transform .2s;display:inline-block}
+.navw.open .ar2{transform:rotate(-135deg);margin-top:4px}
+.cur .cb{display:flex;align-items:center;gap:6px}
+@media(max-width:860px){
+.nm h1{font-size:26px}
+.ph,.ph img,.ph .ini{width:104px;height:104px}.ph .ini{font-size:36px}
+.bn{font-size:13px;padding:10px 92px}.vb{left:8px;font-size:12px;padding:6px 11px}
+.cl .vl{font-size:24px;padding:13px 0}.cl .lb{font-size:12px}
+.navw{padding:6px 2px 12px}
+.cur{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;border:0;border-radius:30px;padding:12px 16px;color:#fff;font-weight:900;font-size:13px;letter-spacing:.3px;cursor:pointer;text-align:left;background:var(--c);box-shadow:0 4px 0 rgba(0,0,0,.22)}
+.cur b{background:rgba(255,255,255,.92);color:var(--c);border-radius:12px;padding:1px 8px;font-size:11px}
+.cur .emoji{height:1.2em;width:1.2em}
+.navw .nav{display:none;flex-direction:column;overflow:visible;padding:12px 2px 2px}
+.navw.open .nav{display:flex}
+.nav button{width:100%}.nav button.on{transform:none}
+}
+
+/* ===== Ajustes v15 ===== */
+.chip.k4{background:#ede9fe;color:#5b21b6;border:2px solid #c4b5fd}.chip.k5{background:#ffe9cc;color:#9a4a00;border:2px solid #ffc680}
+.dl{margin-left:auto;border:0;border-radius:20px;background:#fff;color:var(--mc);font-weight:900;font-size:12px;padding:6px 14px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.2);white-space:nowrap}.dl:active{transform:scale(.96)}
+.hw{display:block;text-align:right;margin-top:8px;font-size:11.5px;font-weight:600;color:var(--mu);opacity:.85;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}.hw:hover{opacity:1;color:var(--mc)}
+#fxm{display:none;position:fixed;inset:0;z-index:100;background:rgba(10,30,20,.5);align-items:center;justify-content:center;padding:16px}
+#fxm .fb{position:relative;background:#fff;border-radius:20px;border-top:8px solid var(--mc);max-width:480px;width:100%;padding:20px 22px;box-shadow:0 12px 40px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
+#fxm h3{margin:0 0 10px;color:var(--mc);font-size:18px;padding-right:30px}#fxm ol{margin:0 0 12px;padding-left:20px;font-size:14px;line-height:1.5}#fxm li{margin:4px 0}
+#fxm .ff{background:var(--mt);color:var(--mc);border-radius:12px;padding:12px;font-weight:900;text-align:center;font-size:15px}
+#fxm .fe{margin-top:10px;border:2px dashed var(--mc);border-radius:12px;padding:10px 12px;font-size:14px}#fxm .fe small{display:block;font-weight:800;color:var(--mu);margin-bottom:2px}
+#fxm .x{position:absolute;right:12px;top:10px;border:0;background:#eef2ef;border-radius:50%;width:28px;height:28px;cursor:pointer;font-weight:900}
+/* ===== Ajustes v16 ===== */
+body{padding-top:46px}
+#app{padding-bottom:110px}
+.bn{position:fixed;top:0;left:0;right:0;z-index:70}
+.cs{display:none;position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:#fff;color:#be123c;font-weight:900;font-size:13px;letter-spacing:.3px;padding:7px 14px;border-radius:20px;box-shadow:0 3px 0 rgba(0,0,0,.2);cursor:pointer}
+.cs:active{transform:translateY(-50%) scale(.96)}
+.prg{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:3px solid var(--bd);box-shadow:0 -4px 14px rgba(0,60,20,.12);display:flex;justify-content:center;gap:clamp(2px,2vw,22px);padding:6px 6px 8px}
+.pg{flex:1;max-width:120px;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:800;color:var(--c);padding:0}
+.pg i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:20px;background:var(--c);box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.pg.off{color:#9aa6a0}.pg.off i{background:#d9dfdb;filter:grayscale(1);opacity:.65;box-shadow:none}
+@media(max-width:860px){.bn{font-size:13px;padding:10px 100px}.cs{right:8px;font-size:12px;padding:6px 10px}.pg{font-size:9.5px}.pg i{width:32px;height:32px;font-size:17px}}
+</style><script src="https://cdn.jsdelivr.net/npm/@twemoji/api@15.0.0/dist/twemoji.min.js" onload="window.twemoji&&twemoji.parse(document.body,{folder:'svg',ext:'.svg'})"></script></head><body><div class="bn"><a class="vb" href="https://capacitacion3vesmartin-ves.github.io/campuscapacitacion/">← Volver</a><span>🎓</span> CAPACITACIÓN DE INICIO<button id="cs" class="cs" onclick="salir()">Cerrar sesión</button></div><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ===== Ajustes ===== */
+/* >>> ÚNICO AJUSTE: pega aquí el enlace de tu Apps Script (termina en /exec). El alumno nunca lo ve ni lo escribe. <<< */
+const URL_API='https://script.google.com/macros/s/AKfycbzkSse6_EHMM3t1coOF8Wlgb8gOSCBdDL2jQ646euIOTd9kReiKjGZbKqaf40TDF1kj/exec';
+const SEDES=['Villa el Salvador','Puente Piedra','Arequipa','Piura'];const sd0=()=>{try{return localStorage.getItem('alu_sd')||''}catch(e){return ''}};
+const DEMO_HASH=location.hash=='#demo'; /* abre vista_alumno.html#demo para ver el diseño con datos de ejemplo */
+const MODO_PRUEBA=DEMO_HASH;
+const MODS=[['MADERAS',4,1],['FERRETERÍA',4,1],['SINTÉTICOS',4,1],['PROYECTOS / OPT.',4,1],['DOCUMENTACIÓN',3,0],['FACTURACIÓN',3,0]];
+const MSH=['Maderas','Ferretería','Sintéticos','Proyectos','Document.','Facturac.'];
+const MCOL=['#0e9a22','#3d4650','#00b8a0','#2a2470','#4c9f50','#6a1b9a'],MEMO=['🌳','🔧','🧪','📐','📄','🧾'],GCOL='#f58a07';
+const PIEC=['#ff8a00','#35b6ff','#ffd23f','#ff5c8a','#8b5cf6','#10a43a','#14b8a6','#ef4444','#64748b'];
+const nv=v=>{v=parseFloat(String(v).replace(',','.'));return isNaN(v)?null:v},r1=v=>Math.round(v*10)/10,F=v=>{if(v==null)return '–';const r=r1(v);return Number.isInteger(r)?String(r):r.toFixed(1).replace('.',',')},cm=n=>String(r1(n)).replace('.',',');
+const avg=a=>{a=a.filter(v=>v!=null);return a.length?a.reduce((s,v)=>s+v,0)/a.length:null};
+const md=(a,k)=>(a.m&&a.m[k])||{p:[],t:'',c:'',x:[],y:[]};
+function calc(a,j){const M=MODS[j],d=md(a,M[0]),p=[].concat(d.p||[]).map(nv).filter(v=>v!=null),ex=M[2]?(d.x||[]).reduce((s,e)=>s+e.n,0):0,co=M[2]?(d.y||[]).reduce((s,e)=>s+e.n,0):0;
+ const pa=p.length?(p.reduce((s,v)=>s+v,0)+ex-co)/p.length:null;
+ if(!M[2])return{ex,co,pa,fi:null,to:pa};
+ const fi=avg([nv(d.t),nv(d.c)]);return{ex,co,pa,fi,to:avg([pa,fi])}}
+const fin=a=>avg(MODS.map((_,j)=>calc(a,j).to));
+/* ===== Estado y acceso ===== */
+let S=null,DEMO=false,gid=null,dni=null,tab=0,PHS={},CRED=null,DEMO_S=null;
+const nd=v=>String(v==null?'':v).trim().replace(/^0+/,'');
+function convertir(j){const al=j.alumno||{},g=(j.grupos||[])[0]||{},m={};
+ (j.notas||[]).forEach(n=>{const k=n['Módulo'];if(!k)return;const p=['PC1','PC2','PC3','PC4'].map(x=>n[x]).filter(v=>v!==''&&v!=null),fav=nv(n['Puntos a favor'])||0,cj=nv(n['Canjes'])||0,con=nv(n['Puntos en contra'])||0,pt=(j.puntos||[]).filter(x=>x['Módulo']==k);let x=[],y=[];
+  if(pt.length)pt.forEach(r=>{const v=nv(r.Puntos)||0,e={f:r.Fecha||'',mo:r.Motivo||'',n:Math.abs(v)};(v<0||/contra/i.test(r.Tipo||''))?y.push(e):x.push(e)});
+  else{const nf=r1(fav-cj);if(nf>0)x.push({f:'',mo:'Puntos acumulados',n:nf});if(con>0)y.push({f:'',mo:'Puntos acumulados',n:con})}
+  m[k]={p,t:n['Teórico']===''||n['Teórico']==null?'':String(n['Teórico']),c:n['Códigos']===''||n['Códigos']==null?'':String(n['Códigos']),x,y}});
+ const asis=(j.asistencia||[]).map(r=>({f:r.Fecha||'',e:String(r.Estado||r.Puntualidad||'').trim().toUpperCase().slice(0,1),h:r.Hora||'',mo:r.Motivo||''})).filter(r=>r.f&&r.e&&'PTFA'.includes(r.e));
+ return{d:al.dni,n:al.nombre,grupo:g['Nombre del grupo']||'',inicio:g['Fecha de inicio']||'',m,asis,foto:al.foto||''}}
+async function pedir(d,c,s){if(!URL_API)return{ok:false,error:'config'};
+ try{const r=await fetch(URL_API,{method:'POST',body:JSON.stringify({accion:'login_alumno',sede:s,dni:d,clave:c})}),j=await r.json();
+  if(!j.ok)return{ok:false,error:({CREDENCIALES:'cred',BLOQUEO:'bloqueado',INACTIVO:'inactivo',DATOS:'datos'})[j.codigo]||'sistema'};
+  return{ok:true,alumno:convertir(j)}}catch(e){return{ok:false,error:'red'}}}
+function armar(al){S={gs:[{id:'a',name:al.grupo||'',start:al.inicio||'',adv:[{d:al.d,n:al.n,m:al.m||{},asis:al.asis||[]}]}],cur:'a'};gid='a';dni=al.d;PHS={};if(al.foto)PHS[nd(al.d)]=al.foto}
+const ERR={sede:'Elige tu sede.',datos:'Escribe tu usuario y tu clave.',cred:'Usuario o clave incorrectos. Revísalos e intenta de nuevo.',bloqueado:'Demasiados intentos. Espera unos minutos y vuelve a intentar.',inactivo:'Tu acceso ya no está disponible.',sin_datos:'Todavía no hay notas registradas para ti. ¡Vuelve pronto! 🌱',red:'No hay conexión. Revisa tu internet e intenta otra vez.',config:'Esta página aún no está lista. Avisa a tu capacitador(a).',sistema:'Hubo un problema. Intenta de nuevo en unos minutos.'};
+async function ingresar(){const d=$('#lu').value.trim(),c=$('#lc').value.trim(),m=$('#le');if(!d||!c){m.style.color='#be123c';m.textContent=ERR.datos;return}
+ m.style.color='var(--mu)';m.textContent='Entrando…';
+ if(DEMO){const a=DEMO_S.gs[0].adv.find(x=>nd(x.d)==nd(d));if(a&&c==='demo'){S=DEMO_S;gid='d1';dni=a.d;tab=0;R()}else{m.style.color='#be123c';m.textContent=ERR.cred}return}
+ const s=($('#ls')||{}).value||'';if(!s){m.style.color='#be123c';m.textContent=ERR.sede;return}
+ const r=await pedir(d,c,s);
+ if(r.ok){CRED={d,c,s};try{sessionStorage.setItem('alu_s',JSON.stringify(CRED));localStorage.setItem('alu_sd',s)}catch(e){}armar(r.alumno);tab=0;R()}
+ else{m.style.color='#be123c';m.textContent=ERR[r.error]||ERR.sistema}}
+function verClave(b){const i=$('#lc'),m=i.type=='password';i.type=m?'text':'password';b.classList.toggle('on',m);i.focus()}
+function salir(){CRED=null;S=null;gid=null;dni=null;try{sessionStorage.removeItem('alu_s')}catch(e){}R()}
+async function refresca(){if(!CRED||DEMO)return;const r=await pedir(CRED.d,CRED.c,CRED.s);
+ if(r.ok){const antes=JSON.stringify(S);armar(r.alumno);if(JSON.stringify(S)!==antes)R(true)}else if(r.error=='inactivo'||r.error=='cred')salir()}
+/* ===== Datos de demostración ===== */
+function demo(){const f=(d,mo,n)=>({f:d,mo,n}),adv=[
+ {d:'70914281',n:'JHONNY ALARCON QUISPE',e:'ACTIVO',asis:[{f:'2026-10-05',e:'P'},{f:'2026-10-06',e:'P'},{f:'2026-10-07',e:'T',h:'08:12'},{f:'2026-10-08',e:'A'},{f:'2026-10-09',e:'F',mo:'Salud'}],m:{MADERAS:{p:[18,15,13,17],t:'16',c:'18',x:[f('2026-10-09','Recursos lógicos',1),f('2026-10-08','Kahoot!',1),f('2026-10-08','Dinámicas',2)],y:[f('2026-10-09','Tardanza',0),f('2026-10-08','Tardanza',2),f('2026-10-07','Tardanza',4),f('2026-10-06','Uso de celular sin autorización',2)]},FERRETERÍA:{p:[16,19],x:[f('2026-10-12','Dictado de códigos',1)],y:[]}}},
+ {d:'70815151',n:'ANA TORRES RAMOS',e:'ACTIVO',m:{MADERAS:{p:[20,19,20,20],t:'20',c:'19',x:[f('2026-10-09','Kahoot!',1),f('2026-10-08','Dinámicas',3)],y:[]}}},
+ {d:'95959595',n:'LUIS PEREZ SOTO',e:'ACTIVO',m:{}}];
+ return {gs:[{id:'d1',name:'Grupo demostración',start:'2026-10-07',adv}],cur:'d1',pun:{}}}
+/* ===== Utilidades ===== */
+const cg=()=>S.gs.find(g=>g.id==gid)||S.gs[0];
+const ca=()=>{const g=cg();return g.adv.find(a=>a.d==dni)||g.adv[0]};
+const ini=a=>a.n.split(' ').slice(0,2).map(w=>w[0]).join('');
+const AVC=['#10a43a','#35b6ff','#8b5cf6','#ff5c8a','#ff8a00','#14b8a6'];
+const sc=v=>v==null?'':r1(v)>=17?'hi':r1(v)>=14?'md':'lo';
+function ents(a,j,ty){const o=[];(j<0?MODS.map((_,k)=>k):[j]).forEach(k=>{(md(a,MODS[k][0])[ty]||[]).forEach(e=>o.push({f:e.f||'',h:e.h||'',mo:e.mo||'',n:e.n,mod:MODS[k][0]}))});
+ o.sort((p,q)=>(q.f+q.h)>(p.f+p.h)?1:(q.f+q.h)<(p.f+p.h)?-1:0);return o}
+function porMotivo(l){const m={};l.forEach(e=>{m[e.mo]=(m[e.mo]||0)+e.n});return Object.keys(m).filter(k=>m[k]>0).map((k,i)=>({l:k,v:m[k],c:PIEC[i%PIEC.length]}))}
+function evals(a,j){const M=MODS[j],d=md(a,M[0]),o=[];for(let k=0;k<M[1];k++){const v=nv((d.p||[])[k]);if(v!=null)o.push({l:'PC '+(k+1),v})}
+ if(M[2]){const t=nv(d.t),c=nv(d.c);if(t!=null)o.push({l:'Teórico',v:t});if(c!=null)o.push({l:'Códigos',v:c})}return o}
+/* ===== Gráficos (SVG) ===== */
+function linea(pts,col){if(!pts.length)return '<div style="padding:34px 10px;color:var(--mu);font-weight:700">Cuando rindas tu primera evaluación verás aquí tu progreso 🚀</div>';
+ const W=560,H=250,L=40,Rr=22,T=22,B=40,y=v=>T+(H-T-B)*(1-v/20),x=i=>pts.length==1?L+(W-L-Rr)/2:L+30+(W-L-Rr-60)*i/(pts.length-1);
+ let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">`;
+ [0,5,10,15,20].forEach(v=>{s+=`<line x1="${L}" x2="${W-Rr}" y1="${y(v)}" y2="${y(v)}" stroke="#dbe7de" stroke-width="1"/><text x="${L-6}" y="${y(v)+4}" font-size="11" text-anchor="end" fill="#6b7f74">${v}</text>`});
+ 
+ const P=pts.map((p,i)=>[x(i),y(p.v)]);
+ s+=`<path d="M${P[0][0]},${y(0)} `+P.map(q=>'L'+q[0]+','+q[1]).join(' ')+` L${P[P.length-1][0]},${y(0)} Z" fill="${col}" opacity=".13"/>`;
+ s+=`<path d="${P.map((q,i)=>(i?'L':'M')+q[0]+','+q[1]).join(' ')}" fill="none" stroke="${col}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+ const mx=Math.max.apply(null,pts.map(p=>p.v));
+ pts.forEach((p,i)=>{s+=`<circle cx="${P[i][0]}" cy="${P[i][1]}" r="6" fill="#fff" stroke="${col}" stroke-width="3.5"/><text x="${P[i][0]}" y="${P[i][1]-12}" font-size="12.5" font-weight="800" text-anchor="middle" fill="${col}">${F(p.v)}${p.v==mx&&pts.length>1?' ★':''}</text><text x="${P[i][0]}" y="${H-14}" font-size="11" text-anchor="middle" fill="#4f6355" font-weight="700">${E(p.l)}</text>`});
+ return s+'</svg>'}
+function pastel(d){const tot=d.reduce((s,x)=>s+x.v,0),cx=75,cy=75,r=68;
+ if(!tot)return `<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="60" fill="none" stroke="#e5ece7" stroke-width="22"/><text x="75" y="80" text-anchor="middle" font-size="12" fill="#8a9a90" font-weight="700">Sin puntos</text></svg>`;
+ if(d.length==1)return `<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="${r}" fill="${d[0].c}"/><circle cx="75" cy="75" r="30" fill="#fff"/></svg>`;
+ let a0=-Math.PI/2,s='<svg viewBox="0 0 150 150">';
+ d.forEach(x=>{const a1=a0+x.v/tot*2*Math.PI,l=a1-a0>Math.PI?1:0;s+=`<path d="M${cx},${cy} L${cx+r*Math.cos(a0)},${cy+r*Math.sin(a0)} A${r},${r} 0 ${l} 1 ${cx+r*Math.cos(a1)},${cy+r*Math.sin(a1)} Z" fill="${x.c}" stroke="#fff" stroke-width="2"/>`;a0=a1});
+ return s+'<circle cx="75" cy="75" r="28" fill="#fff"/></svg>'}
+const leyenda=d=>'<div class="lg">'+d.map(x=>`<div><i style="background:${x.c}"></i><span>${E(x.l)} · <b>${cm(x.v)}</b></span></div>`).join('')+'</div>';
+/* ===== "IA": análisis y mensaje motivacional ===== */
+const CONSEJO={'Tardanza':'Tienes que llegar más puntual: demostrar puntualidad desde la capacitación es muy importante.','Uso de celular sin autorización':'Guarda el celular durante la clase y úsalo solo cuando se autorice, así no pierdes puntos.','Imagen':'Cuida tu imagen según el código: cabello ordenado, sin joyería y damas sin maquillaje ni moña.','Vestimenta':'Revisa tu vestimenta: fotocheck visible, botas lustradas, polo negro, jean azul o negro y chaleco cerrado.','Desayuno en el aula':'Recuerda que el desayuno se toma fuera del aula.'};
+const MNAME=['Maderas','Ferretería','Sintéticos','Proyectos / Optimización','Documentación','Facturación'];
+const MC=[
+ {foco:'los tableros: triplay, MDP, MDF, melamina y sus acabados',rep:'repasa las características y usos de cada tablero y practica reconociéndolos por nombre y acabado',pra:'practica facturando tableros en el sistema y repasa medidas y marcas',top:'dominas los tableros, ayuda a tus compañeros a repasarlos'},
+ {foco:'cerraduras, correderas, bisagras, tornillos y herramientas',rep:'repasa para qué sirve cada accesorio y cómo se factura por cajas y rollos',pra:'practica la facturación por cajas y repasa correderas y bisagras',top:'reconoces los accesorios con facilidad, anímate a explicarlos a tus compañeros'},
+ {foco:'colas, siliconas, pinturas, tintes, lacas y barnices',rep:'repasa qué producto se usa en cada caso y con qué diluyente',pra:'practica relacionando cada producto con su uso y con lo que pide el cliente',top:'sabes qué recomendar en cada caso, eso es atención de primera'},
+ {foco:'techos, pisos, Wall Panel, Drywall y optimización de cortes',rep:'practica el cálculo de materiales y revisa ranuras, perforaciones y cortes en 45',pra:'sigue practicando cálculos y casuísticas de optimización en el sistema',top:'tu cálculo y tu optimización van muy finos, sigue con ese nivel'},
+ {foco:'bancarización, depósitos, carta de cambio, detracción y pago link',rep:'repasa cada proceso paso a paso y practica los trámites en el sistema',pra:'practica las casuísticas de depósitos y notas de crédito en el sistema',top:'dominas los documentos, eso evita errores con el cliente'},
+ {foco:'proformas, tipos de cliente, ofertas, cartera de clientes y post venta',rep:'practica cada proceso de facturación en el sistema hasta que te salga solo',pra:'sigue practicando facturación y repasa los tipos de cliente',top:'facturas con seguridad, estás listo para atender como experto'}];
+const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
+function ptsTxt(ex,co,mo){const cs=mo&&CONSEJO[mo.l]?' '+CONSEJO[mo.l]:'';
+ if(co>ex&&co>0)return{aten:true,t:'Ten cuidado: tienes '+(co>=3?'varios ':'')+'puntos en contra ('+cm(co)+')'+(mo?', sobre todo por '+mo.l.toLowerCase():'')+'.'+cs};
+ if(co>0&&ex>0)return{t:'Tus puntos a favor ('+cm(ex)+') superan a los en contra ('+cm(co)+')'+(mo?'; cuida '+mo.l.toLowerCase():'')+'.'};
+ if(ex>0)return{t:'¡Cero puntos en contra y '+cm(ex)+' a favor! 👏'};
+ if(co>0)return{t:'Cuida tus puntos en contra ('+cm(co)+').'};
+ return{t:'Suma puntos participando en clase.'}}
+function cierre(pr,aten,b,fin){const warn=aten||(pr!=null&&r1(pr)<=13),great=pr!=null&&r1(pr)>=17&&!aten;
+ return{t:warn?'warn':great?'great':'good',e:warn?'💪':great?(fin?'🏆':'🎉'):'😊',
+  h:aten?'¡Atención con tus puntos en contra!':warn?'¡Tú puedes con todo!':great?(fin?'¡Módulo completado con éxito!':'¡Felicitaciones!'):(fin?'¡Módulo completado!':'¡Vas muy bien!'),b:b.join(' ')}}
+function analiza(a,j){return j<0?analizaGen(a):analizaMod(a,j)}
+/* --- Mensajes por módulo: varios textos por situación (se elige uno fijo según el alumno y el módulo) --- */
+const MA={
+ bpc:['Tus puntos en contra te restan: corrige tu actitud.','Tu actitud te perjudica: reduce tus puntos en contra.','Cuida tu comportamiento: los puntos en contra pesan en tu nota.'],
+ bas:['Cuida tu puntualidad y tu asistencia: también cuentan.','Llegar a tiempo suma: mejora tu puntualidad.','Tus tardanzas o faltas te restan: corrígelo.'],
+ mid:['Cuida tus puntos en contra.','Vigila tus puntos en contra para no perder terreno.','Evita sumar más puntos en contra.'],
+ g1:['Tu actitud suma.','Tu buena actitud te está ayudando.','Tus puntos a favor te impulsan.'],
+ g2:['Tu actitud es buena: apóyate en ella.','Tu buena actitud te ayuda: aprovéchala.','Sigue sumando puntos a favor: te ayudan.'],
+ no:['Participa para sumar puntos a favor.','Suma puntos a favor participando en clase.','Anímate a participar: los puntos a favor ayudan.']};
+const MN={
+ 4:{h:['¡Excelente trabajo!','¡Nivel de campeón!','¡Qué rendimiento!','¡Sigue brillando!'],n:['Tu rendimiento en {N} es sobresaliente.','Vas con todo en {N}: tus resultados lo demuestran.','En {N} estás en lo más alto.','Tu desempeño en {N} es de primer nivel.']},
+ 3:{h:['¡Vas muy bien!','¡Buen trabajo!','¡Buen ritmo!','¡Vas por buen camino!'],n:['Buen rendimiento en {N}.','Tu avance en {N} es muy bueno.','Vas por buen camino en {N}.','En {N} estás respondiendo bien.']},
+ 2:{h:['¡Hora de reaccionar!','¡Es momento de esforzarte!','¡Date un impulso!','¡Aún estás a tiempo!'],n:['Tus notas en {N} están en zona de cuidado: aún estás a tiempo.','Tu rendimiento en {N} necesita un impulso, ¡tú puedes!','En {N} todavía puedes mejorar bastante si te esfuerzas.','Tus resultados en {N} piden más esfuerzo.']},
+ 1:{h:['¡Esfuérzate más!','¡Más esfuerzo!','¡Hora de dar más!','¡Pon más empeño!'],n:['Tu nivel en {N} está por debajo de lo esperado: ¡dalo todo!','Necesitas dar más de ti en {N}; aún estás a tiempo.','Tus resultados en {N} no alcanzan lo esperado: con empeño puedes remontar.','En {N} necesitas un mayor esfuerzo desde hoy.']},
+ 0:{h:['¡Reacciona ya!','¡Es momento de reaccionar!','¡Reacciona, aún puedes!','¡Hay que reaccionar!'],n:['Tu nivel en {N} está muy por debajo de lo esperado: cambia el rumbo desde hoy.','Tus resultados en {N} son muy bajos: necesitas reaccionar ya.','En {N} hace falta un cambio urgente; aún estás a tiempo.','Tu rendimiento en {N} pide una reacción inmediata.']},
+ d:{h:['¡No te confíes!','¡Cuidado con confiarte!','¡Mantén el nivel!','¡Atento a tu ritmo!'],n:['Venías muy bien en {N}, pero una nota quedó por debajo de tu nivel: sigue esforzándote.','Una de tus notas en {N} cayó respecto a tu nivel habitual: esfuérzate para no perder ritmo.','Tu nivel en {N} tuvo un bajón en una evaluación: no bajes la guardia.','Ojo en {N}: una nota salió por debajo de lo normal en ti. ¡Mantén el esfuerzo!']}};
+const MF={h:['Evaluaciones completas','Módulo cerrado','Terminaste {N}'],b:['Ya completaste todas tus evaluaciones de {N}. Tu capacitador conversará contigo en persona sobre tus resultados.','Terminaste las evaluaciones de {N}. Tu capacitador te dará su retroalimentación de manera presencial.','Cerraste {N}: tu capacitador revisará contigo tus resultados en persona.']};
+const MB=['¡Cuida tu actitud!','¡Ojo con tu actitud!','¡Buenas notas, cuida tu actitud!'];
+const MI={h:['¡Llega {N}!','¡Comienza {N}!','¡{N} te espera!'],b:['Aquí verás tus notas y tus puntos. Participa y llega puntual.','Empieza con buen pie: participa y llega puntual.','Tus notas y tus puntos aparecerán aquí. Da lo mejor de ti.']};
+const hs=a=>String(a.d)+'|',hf=t=>{let h=2166136261;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>15;h=Math.imul(h,2246822507);h^=h>>>13;h=Math.imul(h,3266489909);h^=h>>>16;return h>>>0},pick=(l,x)=>l[hf(String(x))%l.length],sub=(t,N)=>t.replace(/\{N\}/g,N);
+function analizaMod(a,j){const M=MODS[j],N=MNAME[j],c=calc(a,j),ev=evals(a,j),tot=M[1]+(M[2]?2:0),hecho=ev.length,as=conteoAs(a),h0=hs(a)+j+'|',
+ pr=c.to!=null?c.to:avg(ev.map(x=>x.v)),pc=c.co>c.ex&&c.co>0,asx=as.T>=3||as.F>=1,
+ act=(pc||asx)?'bad':c.co>0?'mid':c.ex>0?'good':'none',
+ aT=(lv,k)=>pick(act=='bad'?(pc?MA.bpc:MA.bas):act=='mid'?MA.mid:act=='good'?(lv>=3?MA.g1:MA.g2):MA.no,h0+k);
+ if(!hecho){if(act=='none')return{t:'info',e:MEMO[j],h:sub(pick(MI.h,h0+'i'),N),b:pick(MI.b,h0+'j')};
+  return{t:act=='bad'?'warn':'info',e:act=='bad'?'💪':MEMO[j],h:act=='bad'?pick(MB,h0+'c'):'¡Empieza con todo!',b:'Aún sin notas en '+N+'. '+aT(0,2)}}
+ const v=r1(pr),lv=v<10?0:v<=13?1:v<15?2:v<17?3:4,comp=hecho>=tot;
+ if(comp)return{t:'info',e:'✅',h:'Evaluaciones completas',b:'Has completado las evaluaciones de este módulo. Espera instrucciones de tu capacitador(a).'};
+ const SM=msgMod(a,j,ev,lv,c,h0);if(SM)return SM;
+ let dip=false;if(ev.length>=2){const vs=ev.map(x=>x.v),mn=Math.min.apply(null,vs),i=vs.indexOf(mn),rs=vs.filter((_,k)=>k!=i),pm=avg(rs);dip=pm>=15&&mn<=pm-4}
+ dip=dip&&lv>=2&&!comp;const key=dip?'d':lv,
+  warn=lv<=2||act=='bad'||dip,great=lv==4&&act!='bad'&&!dip,done=hecho>=tot&&!warn,
+  h=(lv>=3&&!dip&&act=='bad')?pick(MB,h0+'b'):done?(lv==4?'¡Módulo completado con éxito!':'¡Módulo completado!'):pick(MN[key].h,h0+'h'+key);
+ return{t:great?'great':(warn&&!(dip&&lv>=3))?'warn':'good',e:lv==0?'🚨':dip?'⚠️':warn?'💪':great?(done?'🏆':'🎉'):'😊',h:h,b:sub(pick(MN[key].n,h0+'n'+lv),N)+((comp&&(act=='none'||act=='mid'))?'':' '+aT(lv,5))}}
+function msgMod(a,j,ev,lv,c,h0){
+ const N=MNAME[j],co=c.co,ex=c.ex,pr=c.to!=null?c.to:avg(ev.map(x=>x.v)),
+  mo=porMotivo(ents(a,j,'y')).sort((p,q)=>q.v-p.v)[0],ml=mo?mo.l.toLowerCase():'',cs=mo&&CONSEJO[mo.l]?' '+CONSEJO[mo.l]:'',
+  vs=ev.map(x=>x.v),lo=ev.reduce((p,q)=>q.v<p.v?q:p),est=Math.max.apply(null,vs)-Math.min.apply(null,vs)<=3,
+  low=r1(lo.v)<=12||lv<=2,P=(l,k)=>pick(l,h0+'m'+k),por=ml?' por '+ml:'',cc=cm(co),vlo=F(lo.v),vpr=F(pr),rep=MC[j].rep;
+ if(low&&co>0)return{t:'warn',e:'🚨',h:P(['Debes reaccionar','Corrige esto ahora','Esto tiene que cambiar'],'h1'),
+  b:P([
+   'Tu nota en '+lo.l+' de '+N+' es '+vlo+' y acumulas '+cc+' puntos en contra'+por+'. Estudia más y corrige tu actitud desde hoy.',
+   'Con '+vlo+' en '+lo.l+' y '+cc+' puntos en contra'+por+', tu nota en '+N+' está en riesgo. Dedica tiempo al estudio y cambia tu comportamiento.',
+   'En '+N+' tienes una nota baja ('+vlo+' en '+lo.l+') y '+cc+' puntos en contra'+por+'. Estudia, '+rep+', y cuida tu actitud.'],'b1')+cs};
+ if(low)return{t:'warn',e:lv==0?'🚨':'💪',h:P(['Debes estudiar más','Tu nota está por debajo','Es momento de reforzar'],'h2'),
+  b:P([
+   'Tu nota en '+lo.l+' de '+N+' es '+vlo+'. Estudia más: '+rep+'.',
+   'Sacaste '+vlo+' en '+lo.l+'. Está por debajo de lo exigido: dedícale tiempo al estudio y '+rep+'.',
+   'Tu promedio en '+N+' es '+vpr+'. Necesitas más constancia en el estudio: '+rep+'.'],'b2')};
+ if(co>0){const mu=co>=3;return{t:'warn',e:'⚠️',h:P(['Cuida tu actitud','Corrige tus puntos en contra','Atención a tu comportamiento'],'h3'),
+  b:P([
+   'Tus notas en '+N+' son buenas ('+vpr+'), pero '+(mu?'tienes varios puntos en contra':'tienes puntos en contra')+' ('+cc+')'+por+'. Corrígelo antes de que afecte tu nota final.',
+   'Rindes bien en '+N+' ('+vpr+'), pero acumulas '+cc+' puntos en contra'+por+'. No permitas que te quiten nota.',
+   'Tu nivel en '+N+' es bueno ('+vpr+'). Tus '+cc+' puntos en contra'+por+' no corresponden a ese nivel: cámbialo.'],'b3')+cs}}
+ if(est)return{t:lv==4?'great':'good',e:lv==4?'🎉':'😊',h:P(lv==4?['Excelente constancia','Rendimiento sólido','Muy buen nivel']:['Vas bien','Buen ritmo','Rendimiento estable'],'h4'),
+  b:P([
+   'Mantienes notas constantes y buenas en '+N+' ('+vpr+'). Continúa con ese ritmo.',
+   'Tu rendimiento en '+N+' es estable ('+vpr+'). Sigue con la misma constancia.',
+   'En '+N+' respondes de forma pareja en todas tus evaluaciones. Vas bien: mantén el nivel.'],'b4')+(ex>0?' Tus '+cm(ex)+' puntos a favor también suman.':'')};
+ return{t:'good',e:'😊',h:P(['Vas bien, mantén el nivel','Buen avance, no te descuides','Consolida tu rendimiento'],'h5'),
+  b:'Vas bien en '+N+' ('+vpr+'), pero tu nota en '+lo.l+' ('+vlo+') está por debajo del resto. Repasa para sostener tu nivel: '+rep+'.'}}
+function analizaGen(a){const L=MODS.map((m,k)=>({k,v:calc(a,k).to})).filter(x=>x.v!=null),ex=MODS.reduce((s,_,k)=>s+calc(a,k).ex,0),co=MODS.reduce((s,_,k)=>s+calc(a,k).co,0),b=[],
+ mo=porMotivo(ents(a,-1,'y')).sort((p,q)=>q.v-p.v)[0],pr=avg(L.map(x=>x.v));
+ if(!L.length&&!ex&&!co)return{t:'info',e:'🚀',h:'¡Tu aventura recién comienza!',b:'Aquí verás el resumen de tu capacitación. ¡Participa y suma puntos!'};
+ if(L.length){b.push('Promedio '+F(pr)+' · notas en '+L.length+' de '+MODS.length+' módulos.');
+  if(L.length>1){const mx=L.reduce((p,q)=>q.v>p.v?q:p),mn=L.reduce((p,q)=>q.v<p.v?q:p);if(mx.v-mn.v>=1)b.push(mn.v<=12?'Mejor: '+MNAME[mx.k]+' ('+F(mx.v)+'). ¿Qué pasó en '+MNAME[mn.k]+' ('+F(mn.v)+')? Tienes que estudiar más.':'Mejor: '+MNAME[mx.k]+' ('+F(mx.v)+'). A reforzar: '+MNAME[mn.k]+' ('+F(mn.v)+').')}}
+ else b.push('Aún sin notas, pero ya sumas puntos.');
+ const pt=ptsTxt(ex,co,mo);b.push(pt.t);return cierre(L.length?pr:null,pt.aten,b,false)}
+const conteoAs=a=>{const c={P:0,A:0,T:0,F:0};(a.asis||[]).forEach(e=>{if(c[e.e]!=null)c[e.e]++});return c};
+function analizaAsis(a){const c=conteoAs(a),n=c.P+c.A+c.T+c.F,pl=(k,w)=>k+' '+w+(k>1?'s':'');
+ if(!n)return{t:'info',e:'📅',h:'¡Aún no hay registros!',b:'Aquí verás tu asistencia día a día.'};
+ if(c.F)return{t:'warn',e:'💪',h:'Cuida tu asistencia',b:'Tienes '+pl(c.F,'falta')+(c.T?' y '+pl(c.T,'tardanza'):'')+'. ¡Cada día cuenta!'};
+ if(c.T)return{t:'good',e:'😊',h:'¡Casi perfecto!',b:'Tienes '+pl(c.T,'tardanza')+'. Llegar puntual suma a tu imagen.'};
+ return{t:'great',e:'🏆',h:'¡Asistencia ejemplar!',b:'Ninguna tardanza ni falta. ¡Sigue así!'}}
+function confeti(){for(let i=0;i<46;i++){const d=document.createElement('div');d.className='cf';d.style.left=Math.random()*100+'vw';d.style.background=PIEC[i%PIEC.length];d.style.animationDelay=Math.random()*.9+'s';d.style.borderRadius=i%3?'2px':'50%';document.body.appendChild(d);setTimeout(()=>d.remove(),4400)}}
+/* ===== Vistas ===== */
+function tablaPts(l,ty){return `<div class="tw"><table class="mt"><tr><th>Fecha<th>Módulo<th>Motivo<th>Puntos</tr>`+(l.map(e=>{const sg=(ty=='x'?1:-1)*(e.n>=0?1:-1);return `<tr><td>${E(e.f)||'–'}<td class="l">${E(e.mod)}<td class="l">${E(e.mo)}<td><span class="sg ${ty=='x'?'f':'c'}">${e.n==0?'':sg>0?'+':'−'}${cm(Math.abs(e.n))}</span></tr>`}).join('')||'<tr><td colspan="4" style="padding:14px;color:#8a9a90">Aún sin registros ✨</td></tr>')+'</table></div>'}
+function puntos(a,j,ex,co){const ex1=ents(a,j,'x'),co1=ents(a,j,'y'),
+ bl=(cl,tit,v,l,ty)=>`<details class="card pd ${cl}"><summary><span class="pt">${tit}</span><strong>${cm(v)}</strong><span class="vd"><span class="v1">Ver detalle</span><span class="v2">Ocultar</span><i class="ar"></i></span></summary><div class="pr2"><div class="pie">${pastel(porMotivo(l))}${leyenda(porMotivo(l))}</div>${tablaPts(l,ty)}</div></details>`;
+ return bl('f','⭐ MIS PUNTOS A FAVOR',ex,ex1,'x')+bl('c','⚠️ MIS PUNTOS EN CONTRA',co,co1,'y')}
+function vMod(a,j){const M=MODS[j],d=md(a,M[0]),c=calc(a,j),col=MCOL[j],ev=evals(a,j),comp=ev.length>=M[1]+(M[2]?2:0),
+ vl=(lb,v,cl)=>{const n=nv(v);return `<div class="cl"><span class="lb">${lb}</span><span class="vl ${cl||sc(n)}">${n==null?'–':F(n)}</span></div>`},
+ pcs=Array.from({length:M[1]},(_,k)=>vl('PC '+(k+1),(d.p||[])[k])).join(''),
+ sm=v=>v!=null&&r1(v)>=17?' 🌟':v!=null&&r1(v)>=15?' 😊':'';
+ const par=`<div class="sx pa"><h4>📚 ${M[2]?'PARCIAL':'PRÁCTICAS'} <small>${M[2]?'prácticas y puntos':'tus prácticas'}</small></h4><div class="cg">${pcs}</div>`+
+  (M[2]?`<div class="pp"><span class="sg f">⭐ A favor <b>${c.ex?'+':''}${cm(c.ex)}</b></span><span class="sg c">⚠️ En contra <b>${c.co?'−':''}${cm(c.co)}</b></span></div>`:'')+
+  `<div class="rs"><span>${M[2]?'PARCIAL':'PROMEDIO'}</span><b>${F(c.pa)}</b></div>${hw('pa',j,'¿Cómo se calculan las notas?')}</div>`,
+ fi=M[2]?`<div class="sx rf"><h4>🏁 RECTA FINAL <small>teórico y códigos</small></h4><div class="cg two">${vl('Teórico',d.t)}${vl('Códigos',d.c)}</div><div class="rs"><span>FINALES</span><b>${F(c.fi)}</b></div>${hw('fi',j,'¿Cómo se calculan los finales?')}</div>`:'',
+ tot=`<div class="fin"><div><small>NOTA FINAL DEL MÓDULO</small>${comp?'':'<span>¡así va hasta el momento!</span>'}</div><strong>${F(c.to)}${sm(c.to)}</strong></div>${hw('to',j,'¿Cómo se calcula la nota final?')}`;
+ return `<div class="mp" style="--mc:${col};--mt:${col}1f"><div class="mb">${MEMO[j]} MÓDULO · ${M[0]}<button class="dl" onclick="rep(${j})">📥 Descargar reporte</button></div><div class="box">${par}${fi}${tot}</div>
+ <div class="card cht"><h3>📈 ¡Mira cómo vas en ${M[0]}!</h3>${linea(evals(a,j),col)}</div>${puntos(a,j,c.ex,c.co)}${vAsis(a,1)}</div>`}
+function vGen(a){const f=fin(a),ex=MODS.reduce((s,_,k)=>s+calc(a,k).ex,0),co=MODS.reduce((s,_,k)=>s+calc(a,k).co,0),pts=[];MODS.forEach((m,k)=>{const t=calc(a,k).to;if(t!=null)pts.push({l:MSH[k],v:t})});
+ const rows=MODS.map((m,k)=>{const c=calc(a,k);return `<tr><td class="n" style="background:${MCOL[k]}">${MEMO[k]} ${m[0]}<td>${F(c.pa)}<td>${m[2]?F(c.fi):'–'}<td style="background:#bff1f7;color:#0e7490;border-color:#6fd8e6">${F(c.to)}</tr>`}).join('');
+ return `<div class="mp" style="--mc:${GCOL}"><div class="mb">🏅 NOTAS GENERALES<button class="dl" onclick="rep(-1)">📥 Descargar reporte</button></div><div class="box" style="border-color:${GCOL}"><table class="gt"><tr><th>Módulo<th>Parcial<th>Finales<th>Total</tr>${rows}</table><div class="fin" style="margin-top:10px"><div><small>PROMEDIO TOTAL DE CAPACITACIÓN</small><span>promedio de todos tus módulos</span></div><strong>${F(f)}</strong></div>${hw('gen',-1,'¿Cómo se calcula el promedio total?')}</div>
+ <div class="card cht"><h3 style="color:${GCOL}">📈 ¡Mi avance por módulo!</h3>${linea(pts,GCOL)}</div>${puntos(a,-1,ex,co)}</div>`}
+const hoyS=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const DOW=['dom','lun','mar','mié','jue','vie','sáb'],MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],ASN={P:'Puntual',A:'Aceptable',T:'Tardanza',F:'Falta'};
+function vAsis(a,emb){const c=conteoAs(a),hy=hoyS(),L=(a.asis||[]).slice().sort((p,q)=>p.f<q.f?-1:p.f>q.f?1:0);
+ if(!L.some(e=>e.f==hy)&&new Date().getDay()!==0)L.push({f:hy,e:''});
+ const chips=['P','A','T','F'].map(k=>`<div class="kc"><span class="lt s ${k}">${k}</span>${ASN[k]} <b>${c[k]}</b></div>`).join('');
+ const tiles=L.map(e=>{const p=String(e.f).split('-'),d=new Date(+p[0],+p[1]-1,+p[2]),ok=!isNaN(d.getTime()),
+  cp=e.e=='T'?'Tardanza'+(e.h?' '+E(e.h):''):e.e=='F'?'Falta'+(e.mo?': '+E(e.mo):''):e.e?ASN[e.e]:'Pendiente';
+  return `<div class="dy ${e.f==hy?'hoy':''}"><small>${ok?DOW[d.getDay()]:''}</small><div class="dt">${ok?p[2]+' '+MES[d.getMonth()]:E(e.f)}</div><div class="lt ${e.e||'N'}">${e.e||'–'}</div><div class="sm" title="${cp}">${cp}</div></div>`}).join('');
+ const inner=`<div class="ac">${chips}</div><div class="ag">${tiles||'<div style="color:var(--mu);font-weight:700">Aún sin registros ✨</div>'}</div>`;
+ if(emb)return `<div class="card"><h3 style="color:#2563eb">📅 MIS ASISTENCIAS</h3>${inner}</div>`;
+ return `<div class="mp" style="--mc:#2563eb;--mt:#2563eb1f"><div class="mb">📅 REGISTRO DE ASISTENCIAS</div><div class="box">${inner}</div></div>`}
+function R(keep){const cb=$('#cs');if(cb)cb.style.display=S?'block':'none';if(!S){$('#app').innerHTML=`<div class="card setup"><div class="tt" style="display:inline-block;margin-bottom:14px"><span>🌟</span>MIS CALIFICACIONES</div><h2 style="margin:6px 0 2px">¡Bienvenido(a)!</h2><p style="color:var(--mu);margin:0 0 8px">A continuación, coloca tu usuario y clave para acceder a tu reporte.</p>
+ <div class="lf"><div class="lg0">Sede</div><select id="ls"><option value="">Elige tu sede</option>${SEDES.map(x=>`<option ${x==sd0()?'selected':''}>${x}</option>`).join('')}</select><div class="lg0">Usuario</div><input id="lu" inputmode="numeric" autocomplete="off" onkeydown="if(event.key=='Enter')$('#lc').focus()"><div class="lg0">Clave</div><div class="pw"><input id="lc" type="password" autocomplete="new-password" onkeydown="if(event.key=='Enter')ingresar()"><button type="button" class="eye" onclick="verClave(this)" title="Mostrar u ocultar la clave" aria-label="Mostrar u ocultar la clave"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path class="sl" d="M3 3l18 18"/></svg></button></div></div>
+ <p><button class="bt" onclick="ingresar()">Ingresar 🚀</button></p><p id="le" style="font-weight:700;min-height:1.4em;margin:6px 0 0"></p></div>`;if(window.twemoji)twemoji.parse($('#app'),{folder:'svg',ext:'.svg'});return}
+ if(!gid)gid=S.cur&&S.gs.find(g=>g.id==S.cur)?S.cur:S.gs[0].id;const g=cg();if(!g.adv.length){$('#app').innerHTML='<div class="card setup">Aún no hay asesores en este grupo.</div>';return}
+ if(!dni||!g.adv.find(a=>a.d==dni))dni=g.adv[0].d;const a=ca(),f=fin(a),A=tab==='a'?analizaAsis(a):analiza(a,tab==='g'?-1:tab),ph=PHS[nd(a.d)]||'',cl=AVC[(a.n.charCodeAt(0)+a.n.length)%6];
+ const cc=tab==='g'?{c:GCOL,l:'🏅 NOTAS GENERALES',b:''}:tab==='a'?{c:'#2563eb',l:'📅 REGISTRO DE ASISTENCIAS',b:''}:{c:MCOL[tab],l:MEMO[tab]+' '+MODS[tab][0],b:calc(a,tab).to!=null?F(calc(a,tab).to):''};
+ const nav=MODS.map((m,j)=>{const t=calc(a,j).to;return `<button class="${tab===j?'on':''}" style="--c:${MCOL[j]}" onclick="go(${j})"><span>${MEMO[j]} ${m[0]}</span>${t!=null?'<b>'+F(t)+'</b>':''}</button>`}).join('')+`<button class="gen ${tab==='g'?'on':''}" style="--c:${GCOL}" onclick="go('g')"><span>🏅 NOTAS GENERALES</span></button><button class="gen ${tab==='a'?'on':''}" style="--c:#2563eb;margin-top:0" onclick="go('a')"><span>📅 REGISTRO DE ASISTENCIAS</span></button>`;
+ $('#app').innerHTML=(MODO_PRUEBA?`<div class="pv">🧪 Modo de prueba (se quitará con el login) · Grupo <select onchange="gid=this.value;dni=null;R()">${S.gs.map(x=>`<option value="${E(x.id)}" ${x.id==gid?'selected':''}>${E(x.name)}</option>`).join('')}</select> Asesor <select onchange="dni=this.value;R()">${g.adv.map(x=>`<option value="${E(x.d)}" ${x.d==a.d?'selected':''}>${E(x.n)}</option>`).join('')}</select>${DEMO?' · datos de demostración':''}</div>`:'')+
+ `<div class="hd"><div class="tt"><span>🌟</span>MIS<br>CALIFICACIONES</div><div class="nm"><h1>${E(a.n)}</h1><div class="sb"><span class="chip c1">Capacitación Martín</span><span class="chip c3">Sede: ${E((CRED&&CRED.s)||sd0()||'–')}</span><span class="chip k4">DNI ${E(a.d)}</span>${g.name?`<span class="chip k5">👥 ${E(g.name)}</span>`:''}</div></div>
+ <div class="ph">${ph?`<img src="${E(ph)}" referrerpolicy="no-referrer" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:''}<div class="ini" style="background:${cl};${ph?'display:none':''}">${E(ini(a))}</div></div></div>
+ <div class="bd"><div class="navw"><button type="button" class="cur" style="--c:${cc.c}" onclick="this.parentNode.classList.toggle('open')"><span>${cc.l}</span><span class="cb">${cc.b?'<b>'+cc.b+'</b>':''}<i class="ar2"></i></span></button><div class="nav">${nav}</div></div><div class="dv"></div><div style="min-width:0">${tab==='g'?vGen(a):tab==='a'?vAsis(a):vMod(a,tab)}
+ <div class="msg ${A.t}"><span class="tag">💬 Mensaje para ti</span><div class="mi">${A.e}</div><b>${E(A.h)}</b><p>${E(A.b)}</p></div></div></div>
+ <div class="prg">${MODS.map((m,j)=>`<button class="pg ${evals(a,j).length?'on':'off'}" style="--c:${MCOL[j]}" onclick="go(${j})"><i>${MEMO[j]}</i><span>${MSH[j]}</span></button>`).join('')}</div>`;
+ if(window.twemoji)twemoji.parse($('#app'),{folder:'svg',ext:'.svg'});if(!keep&&A.t=='great')confeti()}
+
+/* ===== Ventana: cómo se calculan las notas ===== */
+const hw=(k,j,t)=>`<a class="hw" onclick="fx('${k}',${j})">ⓘ ${t}</a>`;
+function fx(k,j){const a=ca(),M=j>=0?MODS[j]:null,c=M?calc(a,j):null,d=M?md(a,M[0]):null,p=d?(d.p||[]).map(nv).filter(v=>v!=null):[],
+ pcl=M?Array.from({length:M[1]},(_,i)=>'PC'+(i+1)):[],li=l=>'<ol>'+l.map(x=>'<li>'+x+'</li>').join('')+'</ol>';let t,s,f,e='';
+ const ejPa=()=>p.length?(M[2]?'('+p.map(F).join(' + ')+' + '+cm(c.ex)+' − '+cm(c.co)+')':'('+p.map(F).join(' + ')+')')+' ÷ '+p.length+' = <b>'+F(c.pa)+'</b>':'Cuando rindas tu primera PC verás aquí tu ejemplo.';
+ if(k=='pa'){t=M[2]?'Cómo se calcula tu PARCIAL':'Cómo se calcula tu PROMEDIO';
+  s=li(['Suma tus notas de práctica ('+pcl.join(', ')+').'].concat(M[2]?['Súmale tus <b>puntos a favor</b> ⭐: te ayudan a subir.','Réstale tus <b>puntos en contra</b> ⚠️: te hacen bajar.']:[],['Divide el resultado entre las PC que ya rendiste. Cuando completes las '+M[1]+', será entre '+M[1]+'.']));
+  f=(M[2]?'('+pcl.join(' + ')+' + A favor − En contra)':'('+pcl.join(' + ')+')')+' ÷ '+M[1];e=ejPa()}
+ else if(k=='fi'){const x=nv(d.t),y=nv(d.c);t='Cómo se calculan tus FINALES';
+  s=li(['Rindes dos exámenes: el <b>teórico</b> y el de <b>códigos</b>.','Se suman las dos notas y se dividen entre 2.']);f='(Teórico + Códigos) ÷ 2';
+  e=x!=null&&y!=null?'('+F(x)+' + '+F(y)+') ÷ 2 = <b>'+F(c.fi)+'</b>':x!=null||y!=null?'Por ahora solo tienes una nota ('+F(x!=null?x:y)+'): ese es tu promedio de finales hasta que rindas el otro examen.':'Aún no rindes tus exámenes finales.'}
+ else if(k=='to'){t='Cómo se calcula la NOTA FINAL del módulo';
+  if(M[2]){s=li(['Toma tu <b>parcial</b> (prácticas más puntos).','Toma tu promedio de <b>finales</b> (teórico y códigos).','Suma ambos y divide entre 2.','Si aún no rindes los finales, tu nota por ahora es tu parcial.']);f='(Parcial + Finales) ÷ 2';
+   e=c.fi!=null?'('+F(c.pa)+' + '+F(c.fi)+') ÷ 2 = <b>'+F(c.to)+'</b>':c.pa!=null?'Aún sin finales: tu nota por ahora es tu parcial, <b>'+F(c.pa)+'</b>.':''}
+  else{s=li(['Este módulo no tiene exámenes finales.','Tu nota final es el promedio de tus prácticas ('+pcl.join(', ')+').']);f='('+pcl.join(' + ')+') ÷ '+M[1];e=ejPa()}}
+ else{const L=MODS.map((_,i)=>calc(a,i).to).filter(v=>v!=null);t='Cómo se calcula tu PROMEDIO TOTAL';
+  s=li(['Cada módulo tiene su <b>nota final</b> (columna Total).','Se suman las notas finales de todos los módulos y se dividen entre la cantidad de módulos con nota.','Los módulos sin nota aún no cuentan: se irán sumando conforme los rindas.']);f='(Módulo 1 + Módulo 2 + … ) ÷ módulos con nota';
+  e=L.length?'('+L.map(F).join(' + ')+') ÷ '+L.length+' = <b>'+F(fin(a))+'</b>':''}
+ let m=$('#fxm');if(!m){m=document.createElement('div');m.id='fxm';m.onclick=ev=>{if(ev.target==m||ev.target.className=='x')m.style.display='none'};document.body.appendChild(m)}
+ const col=j>=0?MCOL[j]:GCOL;m.style.setProperty('--mc',col);m.style.setProperty('--mt',col+'1f');
+ m.innerHTML=`<div class="fb"><button class="x">✕</button><h3>${t}</h3>${s}<div class="ff">${f}</div>${e?`<div class="fe"><small>Con tus notas:</small>${e}</div>`:''}</div>`;m.style.display='flex';if(window.twemoji)twemoji.parse(m,{folder:'svg',ext:'.svg'})}
+/* ===== Reporte descargable (imagen PNG) ===== */
+function loadImg(src){const t1=u=>new Promise(r=>{const i=new Image();i.crossOrigin='anonymous';i.referrerPolicy='no-referrer';i.onload=()=>r(i);i.onerror=()=>r(null);i.src=u});
+ return (async()=>{if(!src)return null;const L=[src],m=String(src).match(/[?&]id=([\w-]{15,})/)||String(src).match(/\/d\/([\w-]{15,})/);
+  if(m){L.push('https://lh3.googleusercontent.com/d/'+m[1]+'=w500','https://drive.google.com/thumbnail?id='+m[1]+'&sz=w500')}
+  for(const u of L){const i=await t1(u);if(i)return i}return null})()}
+async function rep(j){const a=ca(),g=cg(),im=await loadImg(PHS[nd(a.d)]||'');
+ const go2=i=>{const cv=pintaRep(a,g,j,i),l=document.createElement('a');l.href=cv.toDataURL('image/png');l.download='Reporte_'+(j<0?'General':MODS[j][0].replace(/[^A-Za-zÁÉÍÓÚÑ]/g,''))+'_'+a.n.split(' ')[0]+'.png';document.body.appendChild(l);l.click();l.remove()};
+ try{go2(im)}catch(e){try{go2(null)}catch(e2){alert('No se pudo generar el reporte. Intenta de nuevo.')}}}
+function pintaRep(a,g,j,im){const W=1080,P=36,S2=2,gen=j<0,M=gen?null:MODS[j],col=gen?GCOL:MCOL[j],cv=document.createElement('canvas');cv.width=W*S2;cv.height=2400*S2;const c=cv.getContext('2d');c.scale(S2,S2);
+ const FT='"Segoe UI",Arial,sans-serif',T=(t,x,y,sz,co,w,al)=>{c.font=(w||700)+' '+sz+'px '+FT;c.fillStyle=co;c.textAlign=al||'left';c.fillText(t,x,y)},
+ RR=(x,y,w,h,r,f,s)=>{c.beginPath();c.roundRect?c.roundRect(x,y,w,h,r):c.rect(x,y,w,h);if(f){c.fillStyle=f;c.fill()}if(s){c.strokeStyle=s;c.lineWidth=2;c.stroke()}},
+ fit=(t,w,sz,wt)=>{c.font=(wt||700)+' '+sz+'px '+FT;t=String(t);while(c.measureText(t).width>w&&t.length>1)t=t.slice(0,-1);return t},
+ wrap=(t,w,sz)=>{c.font='700 '+sz+'px '+FT;const o=[];let l='';String(t).split(' ').forEach(q=>{const z=l?l+' '+q:q;if(c.measureText(z).width>w&&l){o.push(l);l=q}else l=z});if(l)o.push(l);return o},
+ chip=(x,y,t,bg,fg)=>{c.font='800 15px '+FT;const w=c.measureText(t).width+24;RR(x,y,w,28,14,bg);T(t,x+12,y+19,15,fg,800);return w+10},
+ sec=t=>{RR(P,y,W-2*P,34,10,col);T(t,P+16,y+23,15,'#fff',900);y+=46},
+ vc=v=>{const k=sc(v);return k=='hi'?['#d3f5da','#06621c']:k=='md'?['#fff2b8','#8a5a00']:k=='lo'?['#ffe1cc','#c2410c']:['#fff','#9aa8a0']};
+ let y=0;RR(0,0,W,2400,0,'#f3fbf5');RR(0,0,W,196,0,col);
+ T('CAPACITACIÓN MARTÍN · REPORTE '+(gen?'GENERAL':'DE MÓDULO'),P,36,14,'rgba(255,255,255,.88)',800);
+ c.save();RR(P,56,112,112,24);c.clip();
+ if(im){const z=Math.max(112/im.width,112/im.height),w=im.width*z,h=im.height*z;c.drawImage(im,P+(112-w)/2,56+(112-h)/2,w,h)}else{c.fillStyle='rgba(255,255,255,.25)';c.fillRect(P,56,112,112);T(ini(a),P+56,56+72,44,'#fff',900,'center')}
+ c.restore();RR(P,56,112,112,24,null,'#fff');
+ T(fit(a.n.toUpperCase(),W-P-190,30,900),180,92,30,'#fff',900);
+ let cx=180;cx+=chip(cx,106,'DNI '+a.d,'#ede9fe','#5b21b6');if(g.name)cx+=chip(cx,106,fit(g.name,260,15,800),'#ffe9cc','#9a4a00');chip(cx,106,'Sede: '+((CRED&&CRED.s)||sd0()||'–'),'#dbeafe','#1e40af');
+ T(gen?'🏅 NOTAS GENERALES':MEMO[j]+' MÓDULO · '+M[0],180,158,26,'#fff',900);
+ y=224;
+ let ex,co;
+ if(!gen){const d=md(a,M[0]),cc=calc(a,j),it=[];ex=cc.ex;co=cc.co;for(let k=0;k<M[1];k++)it.push(['PC '+(k+1),nv((d.p||[])[k])]);if(M[2])it.push(['TEÓRICO',nv(d.t)],['CÓDIGOS',nv(d.c)]);
+  sec('NOTAS DEL MÓDULO');const n=it.length,gp=10,w=(W-2*P-gp*(n-1))/n;
+  it.forEach((q,i)=>{const x=P+i*(w+gp),k=vc(q[1]);RR(x,y,w,86,14,k[0],'#d5e3d9');T(q[0],x+w/2,y+26,13,'#5b6f66',800,'center');T(F(q[1]),x+w/2,y+66,34,k[1],900,'center')});y+=102;
+  const bx=[[M[2]?'PARCIAL':'PROMEDIO',F(cc.pa),M[2]?'A favor +'+cm(cc.ex)+'  ·  En contra −'+cm(cc.co):'Promedio de tus prácticas','#dbeafe','#1e40af']];
+  if(M[2])bx.push(['FINALES',F(cc.fi),'(Teórico + Códigos) ÷ 2','#ffe9cc','#b45309']);bx.push(['NOTA FINAL',F(cc.to),M[2]?'(Parcial + Finales) ÷ 2':'Promedio de tus prácticas',col,'#fff']);
+  const bw=(W-2*P-12*(bx.length-1))/bx.length;
+  bx.forEach((q,i)=>{const x=P+i*(bw+12),last=i==bx.length-1;RR(x,y,bw,110,16,q[3]);T(q[0],x+18,y+30,14,last?'#fff':q[4],900);T(q[1],x+bw-18,y+72,46,last?'#fff':q[4],900,'right');T(fit(q[2],bw-36,12,700),x+18,y+98,12,last?'rgba(255,255,255,.9)':q[4],700)});y+=134}
+ else{ex=MODS.reduce((s,_,k)=>s+calc(a,k).ex,0);co=MODS.reduce((s,_,k)=>s+calc(a,k).co,0);sec('NOTAS POR MÓDULO');
+  const cw=(W-2*P-312-16)/3;['PARCIAL','FINALES','TOTAL'].forEach((h,i)=>T(h,P+312+i*(cw+8)+cw/2,y+12,12,'#b45309',900,'center'));y+=20;
+  MODS.forEach((m,k)=>{const q=calc(a,k);RR(P,y,300,40,12,MCOL[k]);T(MEMO[k]+' '+m[0],P+14,y+26,15,'#fff',800);
+   [q.pa,m[2]?q.fi:null,q.to].forEach((v,i)=>{const z=i==2?['#bff1f7','#0e7490']:vc(v);RR(P+312+i*(cw+8),y,cw,40,12,z[0],'#d5e3d9');T(F(v),P+312+i*(cw+8)+cw/2,y+27,19,z[1],900,'center')});y+=48});
+  RR(P,y+4,W-2*P,86,18,col);T('PROMEDIO TOTAL DE CAPACITACIÓN',P+24,y+40,18,'#fff',900);T('promedio de todos tus módulos',P+24,y+66,13,'rgba(255,255,255,.9)',700);T(F(fin(a)),W-P-24,y+68,52,'#fff',900,'right');y+=112}
+ /* estadística */
+ sec('ESTADÍSTICA');
+ const pts=gen?MODS.map((m,k)=>[MSH[k],calc(a,k).to]).filter(q=>q[1]!=null):evals(a,j).map(e=>[e.l,e.v]),as=conteoAs(a);
+ {const x0=P,y0=y,w=600,h=250;RR(x0,y0,w,h,16,'#fff','#d5e3d9');const L=x0+40,R=x0+w-24,Tp=y0+44,B=y0+h-34,Y=v=>Tp+(B-Tp)*(1-v/20);
+  T(gen?'Avance por módulo':'¡Cómo vas en '+M[0]+'!',x0+16,y0+26,14,col,900);
+  [0,5,10,15,20].forEach(v=>{c.strokeStyle='#dbe7de';c.lineWidth=1;c.beginPath();c.moveTo(L,Y(v));c.lineTo(R,Y(v));c.stroke();T(v,L-8,Y(v)+4,11,'#6b7f74',700,'right')});
+  if(!pts.length)T('Aún sin evaluaciones',(L+R)/2,(Tp+B)/2,15,'#8a9a90',700,'center');
+  else{const X=i=>pts.length==1?(L+R)/2:L+30+(R-L-60)*i/(pts.length-1);c.strokeStyle=col;c.lineWidth=4;c.lineJoin='round';c.beginPath();pts.forEach((q,i)=>i?c.lineTo(X(i),Y(q[1])):c.moveTo(X(i),Y(q[1])));c.stroke();
+   pts.forEach((q,i)=>{c.beginPath();c.arc(X(i),Y(q[1]),6,0,7);c.fillStyle='#fff';c.fill();c.lineWidth=3.5;c.strokeStyle=col;c.stroke();T(F(q[1]),X(i),Y(q[1])-12,13,col,800,'center');T(q[0],X(i),B+20,11,'#4f6355',700,'center')})}
+  const rx=P+620,rw=W-2*P-620,vs=pts.map(q=>q[1]),tot=gen?MODS.length:M[1]+(M[2]?2:0),
+  rows=[['Evaluaciones rendidas',vs.length+' de '+tot,'#dbeafe','#1e40af'],['Mejor nota',vs.length?F(Math.max.apply(null,vs)):'–','#fff2b8','#8a5a00'],['Puntos a favor','+'+cm(ex),'#d3f5da','#06621c'],['Puntos en contra','−'+cm(co),'#ffd9e0','#be123c']];
+  rows.forEach((q,i)=>{const yy=y0+i*44;RR(rx,yy,rw,38,12,q[2]);T(q[0],rx+14,yy+25,14,q[3],800);T(q[1],rx+rw-14,yy+26,18,q[3],900,'right')});
+  const aw=(rw-18)/4,AC={P:'#10a43a',A:'#8a949c',T:'#e11d48',F:'#111'};T('ASISTENCIA',rx,y0+h-62,11,'#5b6f66',900);
+  ['P','A','T','F'].forEach((k,i)=>{const x=rx+i*(aw+6);RR(x,y0+h-52,aw,52,12,AC[k]);T(as[k],x+aw/2,y0+h-26,22,'#fff',900,'center');T(ASN[k],x+aw/2,y0+h-9,11,'#fff',700,'center')});
+  y+=h+22}
+ /* detalle de puntos */
+ const cw2=(W-2*P-16)/2,NMAX=8;let yh=y;
+ [['⭐ PUNTOS A FAVOR',ents(a,j,'x'),'#10a43a','#d3f5da','#06621c','+',ex],['⚠️ PUNTOS EN CONTRA',ents(a,j,'y'),'#e11d48','#ffd9e0','#be123c','−',co]].forEach((q,i)=>{const x=P+i*(cw2+16);let yy=y;
+  RR(x,yy,cw2,38,12,q[2]);T(q[0],x+14,yy+25,14,'#fff',900);T(q[5]+cm(q[6]),x+cw2-14,yy+27,20,'#fff',900,'right');yy+=44;
+  if(!q[1].length){RR(x,yy,cw2,34,10,'#fff','#e3eee6');T('Sin registros',x+cw2/2,yy+22,13,'#8a9a90',700,'center');yy+=40}
+  q[1].slice(0,NMAX).forEach(e=>{RR(x,yy,cw2,30,10,q[3]);T((e.f||'–').slice(5).split('-').reverse().join('/'),x+10,yy+20,12,q[4],800);
+   T(fit((gen?cap(e.mod.toLowerCase())+' · ':'')+e.mo,cw2-120,13,700),x+62,yy+20,13,q[4],700);T(q[5]+cm(e.n),x+cw2-10,yy+20,14,q[4],900,'right');yy+=34});
+  if(q[1].length>NMAX){T('+ '+(q[1].length-NMAX)+' registros más',x+cw2/2,yy+14,12,'#5b6f66',700,'center');yy+=22}
+  yh=Math.max(yh,yy)});
+ y=yh+16;
+ /* mensaje */
+ const A=analiza(a,j),mm={great:['#d9f7e0','#4cc96a','#0a5a22'],good:['#fff3c4','#f0cf55','#5b4300'],warn:['#ffe3cc','#ff9f55','#8a3a00'],info:['#dff3ff','#7cc8f2','#0b4f75']}[A.t]||['#dff3ff','#7cc8f2','#0b4f75'],ls=wrap(A.b,W-2*P-48,16);
+ RR(P,y,W-2*P,74+ls.length*24,18,mm[0],mm[1]);T(A.h.toUpperCase(),W/2,y+36,19,mm[2],900,'center');ls.forEach((l,i)=>T(l,W/2,y+64+i*24,16,mm[2],700,'center'));y+=96+ls.length*24;
+ T('Reporte generado el '+new Date().toLocaleDateString('es-PE')+' · Capacitación Martín',W/2,y+4,12,'#6b7f74',700,'center');y+=28;
+ const o=document.createElement('canvas');o.width=W*S2;o.height=y*S2;o.getContext('2d').drawImage(cv,0,0);return o}
+function go(t){tab=t;R();window.scrollTo(0,0)}
+(async()=>{
+ if(DEMO_HASH){DEMO_S=demo();DEMO=true;S=DEMO_S;R();return}
+ R();let g=null;try{g=JSON.parse(sessionStorage.getItem('alu_s')||'null')}catch(e){}
+ if(g&&g.d){const r=await pedir(g.d,g.c,g.s);if(r.ok){CRED=g;armar(r.alumno);R()}}
+ setInterval(refresca,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresca()})})();
+</script></body></html>
