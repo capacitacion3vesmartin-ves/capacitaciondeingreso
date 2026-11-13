@@ -416,6 +416,20 @@ body.hs #sb::-webkit-scrollbar{display:none}
 .nhs{background:var(--g);color:#fff;border-radius:8px;padding:1px 7px;font-size:10px;font-weight:800;vertical-align:middle}.nhs.nha{background:var(--o)}
 .nhg{border:0;border-radius:10px;padding:9px 14px;font-weight:800;background:var(--g);color:#fff;cursor:pointer}
 .nhl{text-align:center;color:var(--mu);font-weight:600;margin:14px 0}.nhim img{width:100%;height:auto;display:block;border:1px solid #d9e5dc;border-radius:8px}
+
+/* ===== Cronograma ===== */
+.cro{padding:2px 0 30px}.crt{margin:0;font-size:21px;font-weight:800;color:#0b4d1e;letter-spacing:.2px}.crs0{margin:2px 0 16px;font-size:13px;color:#4b5f55;font-weight:500}
+.crs{overflow-x:auto;padding:4px 4px 8px;margin:0 -4px}.crg{display:grid;grid-template-columns:repeat(var(--nc,6),minmax(0,1fr));gap:8px;min-width:620px}
+.crw{text-align:center;font-size:11px;font-weight:800;color:#35483f;padding:2px 0 0;letter-spacing:.2px}
+.crc{background:#fff;border:1px solid #dbe9df;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-height:92px;box-shadow:0 1px 3px rgba(0,60,20,.06)}
+.crc.e{background:#f1f8f3;box-shadow:none}.crc.g{background:#f6faf7;box-shadow:none}
+.crc .d{font-size:11px;font-weight:600;text-align:center;padding:5px 0 4px;color:#2c3f36;min-height:23px}
+.crc .n{background:#0b3d36;color:#fff;font-size:10.5px;font-weight:800;text-align:center;padding:3px 0}
+.crc .t{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;padding:9px 6px;font-size:10.5px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;color:var(--tc,#fff);background:var(--c)}
+.crc .t small{font-size:9px;font-weight:600;text-transform:none;letter-spacing:0;opacity:.92}
+.crc.hy{border:2px solid #f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.22)}
+.crv{padding:26px;text-align:center;color:var(--mu);font-weight:600}
+@media(max-width:860px){.crt{font-size:18px}.crc .t{font-size:10px;padding:7px 4px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@twemoji/api@15.1.0/dist/twemoji.min.js" onload="window.tw&&tw(document.body)" onerror="void 0"></script><script>window.tw=function(n){if(!window.twemoji)return;try{twemoji.parse(n,{folder:'svg',ext:'.svg',base:'https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/',attributes:function(){return{onerror:"this.replaceWith(document.createTextNode(this.alt))"}}})}catch(e){}}</script></head><body><div class="bn"><button class="mbtn" onclick="menu()">☰ Menú</button><a class="vb ext" href="https://capacitacion3vesmartin-ves.github.io/campuscapacitacion/">← Volver</a><span class="bnt"><span>🎓</span> CAPACITACIÓN DE INICIO</span><button id="cs" class="cs" onclick="salir()">Cerrar sesión</button></div><aside id="sb"></aside><div id="sbo" onclick="menu()"></div><div id="app"></div>
 <script>
 const $=s=>document.querySelector(s),E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -450,12 +464,12 @@ function convertir(j){const al=j.alumno||{},g=(j.grupos||[])[0]||{},m={};
   else{const nf=r1(fav-cj);if(nf>0)x.push({f:'',mo:'Puntos acumulados',n:nf});if(con>0)y.push({f:'',mo:'Puntos acumulados',n:con})}
   m[k]={p,t:n['Teórico']===''||n['Teórico']==null?'':String(n['Teórico']),c:n['Códigos']===''||n['Códigos']==null?'':String(n['Códigos']),x,y}});
  const asis=(j.asistencia||[]).map(r=>({f:r.Fecha||'',e:String(r.Estado||r.Puntualidad||'').trim().toUpperCase().slice(0,1),h:r.Hora||'',mo:r.Motivo||''})).filter(r=>r.f&&r.e&&'PTFA'.includes(r.e));
- return{crono:j.cronograma||j.Cronograma||[],d:al.dni,n:al.nombre,grupo:g['Nombre del grupo']||'',inicio:g['Fecha de inicio']||'',m,asis,foto:al.foto||'',obs:al.observaciones||al.Observaciones||al.obs||''}}
+ return{crono:j.cronograma||j.Cronograma||[],d:al.dni,n:al.nombre,grupo:g['Nombre del grupo']||'',inicio:g['Fecha de inicio']||'',malla:String(j.malla||j.Malla||cget(g,/^malla/)||''),m,asis,foto:al.foto||'',obs:al.observaciones||al.Observaciones||al.obs||''}}
 async function pedir(d,c,s){if(!URL_API)return{ok:false,error:'config'};
  try{const r=await fetch(URL_API,{method:'POST',body:JSON.stringify({accion:'login_alumno',sede:s,dni:d,clave:c})}),j=await r.json();
   if(!j.ok)return{ok:false,error:({CREDENCIALES:'cred',BLOQUEO:'bloqueado',INACTIVO:'inactivo',DATOS:'datos',SIN_DATOS:'sin_datos'})[j.codigo]||'sistema'};
   return{ok:true,alumno:convertir(j)}}catch(e){return{ok:false,error:'red'}}}
-function armar(al){S={gs:[{id:'a',name:al.grupo||'',start:al.inicio||'',crono:al.crono||[],adv:[{d:al.d,n:al.n,m:al.m||{},asis:al.asis||[],obs:al.obs||''}]}],cur:'a'};gid='a';dni=al.d;PHS={};if(al.foto)PHS[nd(al.d)]=al.foto}
+function armar(al){S={gs:[{id:'a',name:al.grupo||'',start:al.inicio||'',malla:al.malla||'',crono:al.crono||[],adv:[{d:al.d,n:al.n,m:al.m||{},asis:al.asis||[],obs:al.obs||''}]}],cur:'a'};gid='a';dni=al.d;PHS={};if(al.foto)PHS[nd(al.d)]=al.foto}
 const ERR={sede:'Elige tu sede.',datos:'Escribe tu usuario y tu clave.',cred:'Usuario o clave incorrectos. Revísalos e intenta de nuevo.',bloqueado:'Demasiados intentos. Espera unos minutos y vuelve a intentar.',inactivo:'Tu acceso ya no está disponible.',sin_datos:'Todavía no hay notas registradas para ti. ¡Vuelve pronto! 🌱',red:'No hay conexión. Revisa tu internet e intenta otra vez.',config:'Esta página aún no está lista. Avisa a tu capacitador(a).',sistema:'Hubo un problema. Intenta de nuevo en unos minutos.'};
 async function ingresar(){const d=$('#lu').value.trim(),c=$('#lc').value.trim(),m=$('#le');if(!d||!c){m.style.color='#be123c';m.textContent=ERR.datos;return}
  m.style.color='var(--mu)';m.textContent='Entrando…';
@@ -469,11 +483,14 @@ function salir(){CRED=null;S=null;gid=null;dni=null;try{sessionStorage.removeIte
 async function refresca(){if(!CRED||DEMO)return;const r=await pedir(CRED.d,CRED.c,CRED.s);
  if(r.ok){const antes=JSON.stringify(S);armar(r.alumno);if(JSON.stringify(S)!==antes)R(true)}else if(r.error=='inactivo'||r.error=='cred')salir()}
 /* ===== Datos de demostración ===== */
+function demoCrono(){const T=['PRIMER DÍA','MADERAS I','MADERAS II','MADERAS III','MADERAS IV','REPASO TOTAL MADERAS','MADERAS FINAL','FACTURACIÓN I','FERRETERÍA I','FERRETERÍA II','FERRETERÍA III','FERRETERÍA IV','FERRETERÍA FINAL','DOCUMENTACIÓN II','SINTÉTICOS I','SINTÉTICOS II','SINTÉTICOS III','SINTÉTICOS IV','SINTÉTICOS FINAL','DOCUMENTACIÓN III','OPTIMIZACIÓN','PROYECTOS I','PROYECTOS II','PROYECTOS III','PROYECTOS IV','PROYECTOS FINAL','FACTURACIÓN II','FACTURACIÓN III','FACTURACIÓN IV','FACTURACIÓN V','EVALUACIÓN FINAL'],d=new Date();d.setHours(12,0,0,0);
+ for(let k=5;k>0;){d.setDate(d.getDate()-1);if(d.getDay()!==0)k--}
+ return T.map(t=>{while(d.getDay()===0)d.setDate(d.getDate()+1);const f=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');d.setDate(d.getDate()+1);return{f,t:[t]}})}
 function demo(){const f=(d,mo,n)=>({f:d,mo,n}),adv=[
  {d:'70914281',n:'JHONNY ALARCON QUISPE',e:'ACTIVO',asis:[{f:'2026-10-05',e:'P'},{f:'2026-10-06',e:'P'},{f:'2026-10-07',e:'T',h:'08:12'},{f:'2026-10-08',e:'A'},{f:'2026-10-09',e:'F',mo:'Salud'}],m:{MADERAS:{p:[18,15,13,17],t:'16',c:'18',x:[f('2026-10-09','Recursos lógicos',1),f('2026-10-08','Kahoot!',1),f('2026-10-08','Dinámicas',2)],y:[f('2026-10-09','Tardanza',0),f('2026-10-08','Tardanza',2),f('2026-10-07','Tardanza',4),f('2026-10-06','Uso de celular sin autorización',2)]},FERRETERÍA:{p:[16,19],x:[f('2026-10-12','Dictado de códigos',1)],y:[]}}},
  {d:'70815151',n:'ANA TORRES RAMOS',e:'ACTIVO',m:{MADERAS:{p:[20,19,20,20],t:'20',c:'19',x:[f('2026-10-09','Kahoot!',1),f('2026-10-08','Dinámicas',3)],y:[]}}},
  {d:'95959595',n:'LUIS PEREZ SOTO',e:'ACTIVO',m:{}}];
- return {gs:[{id:'d1',name:'Grupo demostración',start:'2026-10-07',crono:[{Fecha:hoyS(),'Módulo':'Maderas',Tema:'Tableros: triplay, MDP y MDF','Hora inicio':'08:00','Hora fin':'18:00'}],adv}],cur:'d1',pun:{}}}
+ return {gs:[{id:'d1',name:'Grupo demostración',start:'2026-10-07',crono:demoCrono(),malla:'Malla base',adv}],cur:'d1',pun:{}}}
 /* ===== Utilidades ===== */
 const cg=()=>S.gs.find(g=>g.id==gid)||S.gs[0];
 const ca=()=>{const g=cg();return g.adv.find(a=>a.d==dni)||g.adv[0]};
@@ -744,7 +761,11 @@ function cget(r,re){for(const k in r)if(re.test(nk(k)))return r[k];return ''}
 function normF(v){v=String(v==null?'':v).trim();let m=v.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return m[1]+'-'+m[2]+'-'+m[3];m=v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0');return ''}
 function hmin(v){const m=String(v||'').match(/(\d{1,2}):(\d{2})/);return m?+m[1]*60+ +m[2]:null}
 function modIdx(t){t=nk(t);if(!t)return -1;return MODS.findIndex(m=>{const n=nk(m[0]);return t.includes(n.slice(0,5))})}
-function clases(g){return(g.crono||[]).map(r=>({f:normF(cget(r,/^fecha/)),mo:String(cget(r,/modulo/)||'').trim(),tm:String(cget(r,/tema|clase|actividad|curso|contenido|descripcion/)||'').trim(),h1:cget(r,/^(hora.*(inicio|desde|entrada)|inicio|desde)/),h2:cget(r,/^(hora.*(fin|hasta|salida)|fin|hasta)/)})).filter(x=>x.f)}
+function clases(g){return(g.crono||[]).map(r=>{
+ /* formato del script ESCUELA: {f:'2026-11-13', t:['MADERAS I']} (temas del día según la malla del grupo) */
+ if(r&&r.f!==undefined&&Array.isArray(r.t)){const nm=r.t.map(x=>typeof x==='string'?x:(x&&(x.n||x.nombre||x.tema||x.titulo||x.t||x.name))||'').map(s=>String(s).trim()).filter(Boolean);
+  return{f:normF(r.f),mo:nm[0]||'',tm:nm.slice(1).join(' · '),h1:'',h2:''}}
+ return{f:normF(cget(r,/^fecha/)),mo:String(cget(r,/modulo/)||'').trim(),tm:String(cget(r,/tema|clase|actividad|curso|contenido|descripcion/)||'').trim(),h1:cget(r,/^(hora.*(inicio|desde|entrada)|inicio|desde)/),h2:cget(r,/^(hora.*(fin|hasta|salida)|fin|hasta)/)}}).filter(x=>x.f)}
 function inicio(a,g,sede,ph,cl){
  const nom=String(a.n).split(' ')[0].toLowerCase().replace(/^./,c=>c.toUpperCase()),hy=hoyS(),
   fecha=new Date().toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'}),L=clases(g),hoy=L.filter(x=>x.f==hy),prox=L.filter(x=>x.f>hy).sort((p,q)=>p.f<q.f?-1:1)[0],
@@ -762,6 +783,25 @@ function inicio(a,g,sede,ph,cl){
  return `<div class="iw"><div class="rph">${ph?`<img src="${E(ph)}" referrerpolicy="no-referrer" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:''}<div class="ini" style="background:${cl};${ph?'display:none':''}">${E(ini(a))}</div></div><h1>Bienvenido: <span>${E(nom)}</span></h1></div>
  <div class="ic"><small>${E(top)}</small><h2>${E(t)}</h2>${pr||hoy.length?`<div class="pb"><b style="width:${pr}%"></b></div>`:''}${sub?`<p>${E(sub)}</p>`:''}</div>
  <div class="ig">${kk}</div><div class="imh">MIS MÓDULOS</div><div class="im">${mods}</div>`}
+/* ===== Cronograma: se arma con g.crono (lo que devuelve el script) ===== */
+const CRC=[[/primer/,'#2f6fe8'],[/maderas/,'#16a02a'],[/ferreter/,'#3f4854'],[/sintet/,'#00b89c'],[/document/,'#c8e6c4','#1f4d2c'],[/factur/,'#6a1b9a'],[/optimiz/,'#ff9800'],[/proyect/,'#2b2670'],[/evaluaci/,'#2f6fe8']];
+const CRD=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+function vCrono(g,sede){
+ const P=f=>{const q=f.split('-');return new Date(+q[0],+q[1]-1,+q[2],12)},Y=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),
+  m={};clases(g).forEach(c=>{(m[c.f]=m[c.f]||[]).push(c)});const fs=Object.keys(m).sort(),
+  ttl=`<h2 class="crt">Cronograma${g.name?' · '+E(g.name):''}</h2>`;
+ if(!fs.length)return `<div class="cro">${ttl}<p class="crs0">${E([sede,g.malla].filter(Boolean).join(' · '))}</p><div class="rc crv">🗓️ Tu cronograma aún no está publicado. Tu capacitador(a) lo subirá pronto.</div></div>`;
+ const hy=hoyS(),a0=P(fs[0]),a1=P(fs[fs.length-1]),cols=[1,2,3,4,5,6];if(fs.some(f=>P(f).getDay()===0))cols.push(0);
+ const sub=[sede,g.malla,'Inicio '+fs[0],'Cierre '+fs[fs.length-1]].filter(Boolean).join(' · ');
+ let h=cols.map(c=>`<div class="crw">${CRD[c]}</div>`).join('');
+ const w=new Date(a0);w.setDate(w.getDate()-((w.getDay()+6)%7));
+ for(;w<=a1;w.setDate(w.getDate()+7))cols.forEach(c=>{const d=new Date(w);d.setDate(d.getDate()+((c+6)%7));const f=Y(d),e=m[f];
+  if(!e){h+=(d>=a0&&d<=a1)?`<div class="crc g"><div class="d">${d.getDate()}/${d.getMonth()+1}</div></div>`:`<div class="crc e"></div>`;return}
+  const L=e.map(x=>{const t=x.mo||x.tm;return{t,s:[x.mo?x.tm:'',x.h1?x.h1+(x.h2?' – '+x.h2:''):''].filter(Boolean).join(' · ')}}),
+   sb=L.map((x,i)=>i?[x.t,x.s].filter(Boolean).join(' · '):x.s).filter(Boolean).join(' · '),nt=nk(L[0].t+' '+sb),k=CRC.find(q=>q[0].test(nt))||[0,'#64748b'];
+  h+=`<div class="crc${f==hy?' hy':''}" title="${E(L[0].t+(sb?' · '+sb:''))}"><div class="d">${d.getDate()}/${d.getMonth()+1}</div><div class="n">Día ${fs.indexOf(f)+1}</div><div class="t" style="--c:${k[1]};${k[2]?'--tc:'+k[2]:''}">${E(L[0].t||'—')}${sb?`<small>${E(sb)}</small>`:''}</div></div>`});
+ return `<div class="cro">${ttl}<p class="crs0">${E(sub)}</p><div class="crs"><div class="crg" style="--nc:${cols.length}">${h}</div></div></div>`}
+
 function R(keep){const cb=$('#cs');if(cb)cb.style.display=S?'block':'none';
  if(!S){document.body.classList.remove('hs','mo');$('#sb').innerHTML='';$('#app').innerHTML=`<div class="card setup"><div class="tt" style="display:inline-block;margin-bottom:14px"><span>🌟</span>MIS CALIFICACIONES</div><h2 style="margin:6px 0 2px">¡Bienvenido(a)!</h2><p style="color:var(--mu);margin:0 0 8px">A continuación, coloca tu usuario y clave para acceder a tu reporte.</p>
  <div class="lf"><div class="lg0">Sede</div><select id="ls"><option value="">Elige tu sede</option>${SEDES.map(x=>`<option ${x==sd0()?'selected':''}>${x}</option>`).join('')}</select><div class="lg0">Usuario</div><input id="lu" inputmode="numeric" autocomplete="off" onkeydown="if(event.key=='Enter')$('#lc').focus()"><div class="lg0">Clave</div><div class="pw"><input id="lc" type="password" autocomplete="new-password" onkeydown="if(event.key=='Enter')ingresar()"><button type="button" class="eye" onclick="verClave(this)" title="Mostrar u ocultar la clave" aria-label="Mostrar u ocultar la clave"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path class="sl" d="M3 3l18 18"/></svg></button></div></div>
@@ -769,12 +809,12 @@ function R(keep){const cb=$('#cs');if(cb)cb.style.display=S?'block':'none';
  if(!gid)gid=S.cur&&S.gs.find(g=>g.id==S.cur)?S.cur:S.gs[0].id;const g=cg();if(!g.adv.length){$('#app').innerHTML='<div class="card setup">Aún no hay asesores en este grupo.</div>';return}
  if(!dni||!g.adv.find(a=>a.d==dni))dni=g.adv[0].d;const a=ca(),ph=PHS[nd(a.d)]||'',cl=AVC[(a.n.charCodeAt(0)+a.n.length)%6],A=analizaGen(a),sede=(CRED&&CRED.s)||sd0()||'';
  const pv=MODO_PRUEBA?`<div class="pv">🧪 Modo de prueba · Grupo <select onchange="gid=this.value;dni=null;R()">${S.gs.map(x=>`<option value="${E(x.id)}" ${x.id==gid?'selected':''}>${E(x.name)}</option>`).join('')}</select> Asesor <select onchange="dni=this.value;R()">${g.adv.map(x=>`<option value="${E(x.d)}" ${x.d==a.d?'selected':''}>${E(x.n)}</option>`).join('')}</select>${DEMO?' · datos de demostración':''}</div>`:'';
-const mod=typeof tab==='number',Am=mod?analiza(a,tab):tab==='i'?{t:'info'}:tab==='a'?analizaAsis(a):tab==='p'?{t:'info'}:A,
+const mod=typeof tab==='number',Am=mod?analiza(a,tab):tab==='i'?{t:'info'}:tab==='a'?analizaAsis(a):(tab==='p'||tab==='c')?{t:'info'}:A,
  hd=`<div class="rh"><div class="rph">${ph?`<img src="${E(ph)}" referrerpolicy="no-referrer" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:''}<div class="ini" style="background:${cl};${ph?'display:none':''}">${E(ini(a))}</div></div><div class="rtx"><h1>${E(a.n)}</h1><div class="rsb">DNI ${E(a.d)}${sede?'<i>·</i>'+E(sede):''}${g.name?'<i>·</i>'+E(g.name):''}</div></div><button class="dl2" onclick="rep()">⬇ Descargar reporte</button></div>`,
  ms=(m)=>`<div class="msg ${m.t}" style="margin:22px 0 18px"><span class="tag">💬 Mensaje para ti</span><div class="mi">${m.e}</div><b>${E(m.h)}</b><p>${E(m.b)}</p></div>`,
- sb=`<div class="sbh"><span>🎓</span><b>CAPACITACIÓN</b><small>Campus Martín</small></div><button class="${tab==='i'?'on':''}" onclick="go('i')"><span>🏠 Inicio</span></button><div class="sbs">MÓDULOS</div>`+MODS.map((m,j)=>{const t=calc(a,j).to;return `<button class="${tab===j?'on':''}" onclick="go(${j})"><span><u style="background:${MCOL[j]}"></u>${MEMO[j]} ${m[0]}</span>${t!=null?'<b>'+F(t)+'</b>':''}</button>`}).join('')+`<div class="sbs">GENERAL</div><button class="${tab==='n'?'on':''}" onclick="go('n')"><span>📊 Notas generales</span>${fin(a)!=null?'<b>'+F(fin(a))+'</b>':''}</button><button class="${tab==='p'?'on':''}" onclick="go('p')"><span>⭐ Historial de puntos</span></button><button class="${tab==='a'?'on':''}" onclick="go('a')"><span>📅 Récord de asistencia</span></button>`;
+ sb=`<div class="sbh"><span>🎓</span><b>CAPACITACIÓN</b><small>Campus Martín</small></div><button class="${tab==='i'?'on':''}" onclick="go('i')"><span>🏠 Inicio</span></button><div class="sbs">MÓDULOS</div>`+MODS.map((m,j)=>{const t=calc(a,j).to;return `<button class="${tab===j?'on':''}" onclick="go(${j})"><span><u style="background:${MCOL[j]}"></u>${MEMO[j]} ${m[0]}</span>${t!=null?'<b>'+F(t)+'</b>':''}</button>`}).join('')+`<div class="sbs">GENERAL</div><button class="${tab==='n'?'on':''}" onclick="go('n')"><span>📊 Notas generales</span>${fin(a)!=null?'<b>'+F(fin(a))+'</b>':''}</button><button class="${tab==='p'?'on':''}" onclick="go('p')"><span>⭐ Historial de puntos</span></button><button class="${tab==='a'?'on':''}" onclick="go('a')"><span>📅 Récord de asistencia</span></button><button class="${tab==='c'?'on':''}" onclick="go('c')"><span>🗓️ Cronograma</span></button>`;
  $('#sb').innerHTML=sb;document.body.classList.add('hs');tw($('#sb'));
- $('#app').innerHTML=pv+(tab==='i'?inicio(a,g,sede,ph,cl):hd+(mod?vMod(a,tab)+ms(Am):tab==='p'?`<div class="rc" style="padding:14px 20px"><h2 style="margin:0">⭐ Historial de puntos</h2></div><div class="pg2">${ptsSec(a,g,'x')}${ptsSec(a,g,'y')}</div>`:tab==='a'?vAsis(a)+ms(Am):
+ $('#app').innerHTML=pv+(tab==='i'?inicio(a,g,sede,ph,cl):tab==='c'?vCrono(g,sede):hd+(mod?vMod(a,tab)+ms(Am):tab==='p'?`<div class="rc" style="padding:14px 20px"><h2 style="margin:0">⭐ Historial de puntos</h2></div><div class="pg2">${ptsSec(a,g,'x')}${ptsSec(a,g,'y')}</div>`:tab==='a'?vAsis(a)+ms(Am):
  progreso(a)+
  `<div class="rc"><h2>Notas generales</h2>${tablaNotas(a)}<div class="fn">Parcial = (PC + a favor − en contra) ÷ n.º de PC · Finales = (Teórico + Códigos) ÷ 2 · Total = (Parcial + Finales) ÷ 2. Si aún no hay finales, el total es el parcial. Solo se promedian las notas que ya existen. Un casillero 🔒 lo bloquea tu capacitador(a) (por ejemplo, si no tomará ese examen) y no se promedia.</div></div>`+
  avanceCal(a)+ms(A)+
