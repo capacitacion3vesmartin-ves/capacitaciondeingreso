@@ -311,12 +311,13 @@ body.hs .mbtn{display:block;position:absolute;left:8px;top:50%;transform:transla
 .ic h2{margin:8px 0 12px;font-size:32px;font-weight:800;letter-spacing:-.3px;color:#0f2a20;line-height:1.1}
 .pb{height:12px;border-radius:8px;background:#e1efe5;overflow:hidden}.pb b{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#2563eb,#60a5fa)}
 .ic p{margin:10px 0 0;font-size:13.5px;font-weight:700;color:#3d4a43}
-.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
+.ig{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:28px}
 .ik{display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;border-radius:20px;padding:22px 24px;box-shadow:0 10px 24px rgba(0,0,0,.16);transition:.15s;min-width:0}
 .ik:hover{transform:translateY(-3px)}
 .ik .ii{width:58px;height:58px;border-radius:16px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:28px;flex:none}
 .ik b{display:block;font-size:21px;font-weight:800}.ik small{display:block;font-size:12.5px;font-weight:700;opacity:.92;margin-top:3px;line-height:1.25}
 .ik.k1{background:linear-gradient(135deg,#0c8a2c,#22c55e)}.ik.k2{background:linear-gradient(135deg,#7c3aed,#a78bfa)}.ik.k3{background:linear-gradient(135deg,#f58a07,#fdb04a)}
+.ik.k4{background:linear-gradient(135deg,#0369a1,#38bdf8)}
 .imh{font-size:13px;font-weight:800;letter-spacing:1.4px;color:#3d4a43;margin:0 2px 12px}
 .im{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:10px}
 .imc{background:#fff;border:1px solid #dfeee3;border-top:5px solid var(--c);border-radius:16px;padding:14px 16px;text-align:left;cursor:pointer;box-shadow:var(--sh);transition:.15s;font:inherit;color:var(--tx)}
@@ -325,7 +326,7 @@ body.hs .mbtn{display:block;position:absolute;left:8px;top:50%;transform:transla
 .imc strong{display:block;font-size:13.5px;font-weight:800;color:var(--c);letter-spacing:.3px;margin-bottom:10px}
 .imc .pb{height:8px;background:#eef2ef}.imc .pb b{background:var(--c)}
 .imc small{display:block;margin-top:7px;font-size:11.5px;font-weight:700;color:var(--mu)}
-@media(max-width:1100px){.ig{grid-template-columns:1fr}}
+@media(max-width:700px){.ig{grid-template-columns:1fr}}
 @media(max-width:860px){.iw h1{font-size:26px}.ic h2{font-size:24px}.ic{padding:16px 18px}.im{grid-template-columns:1fr 1fr}.ik{padding:16px 18px}}
 
 /* ===== v21 notas generales: móvil ===== */
@@ -778,7 +779,7 @@ function inicio(a,g,sede,ph,cl){
  else{const j=MODS.findIndex((M,k)=>cerr(a,k)<M[1]+(M[2]?2:0)&&cerr(a,k)>0),k=j>=0?j:MODS.findIndex((M,k)=>cerr(a,k)<M[1]+(M[2]?2:0));
   if(k>=0&&cerr(a,k)){const M=MODS[k],tt=M[1]+(M[2]?2:0),h=cerr(a,k);t='Módulo en curso: '+cap(M[0].toLowerCase());sub=h+' de '+tt+' evaluaciones rendidas';pr=h/tt*100}
   else{t='Tu capacitación comienza pronto';sub='Aquí verás tu módulo del día y tu avance.'}}
- const kk=[['k1','⌨️','Dictados','Practicar los códigos de productos','https://capacitacion3vesmartin-ves.github.io/practicarcodigosmartin/'],['k2','📝','Evaluaciones','Abrir las evaluaciones de la capacitación','https://capacitacion3vesmartin-ves.github.io/Evaluaciones/'],['k3','🏫','Campus capacitación','Volver al campus de capacitación','https://capacitacion3vesmartin-ves.github.io/campuscapacitacion/']].map(q=>`<a class="ik ${q[0]} ext" href="${q[4]}"><span class="ii">${q[1]}</span><span><b>${q[2]}</b><small>${q[3]}</small></span></a>`).join(''),
+ const kk=[['k1','⌨️','Dictados','Practicar los códigos de productos','https://capacitacion3vesmartin-ves.github.io/practicarcodigosmartin/'],['k2','📝','Evaluaciones','Abrir las evaluaciones de la capacitación','https://capacitacion3vesmartin-ves.github.io/Evaluaciones/'],['k4','📑','Diapositivas','Ver las diapositivas de la capacitación de ingreso','https://capacitacion3vesmartin-ves.github.io/diapositivascapacitaciondeingreso/'],['k3','🏫','Campus capacitación','Volver al campus de capacitación','https://capacitacion3vesmartin-ves.github.io/campuscapacitacion/']].map(q=>`<a class="ik ${q[0]} ext" href="${q[4]}"><span class="ii">${q[1]}</span><span><b>${q[2]}</b><small>${q[3]}</small></span></a>`).join(''),
  mods=MODS.map((M,j)=>{const tt=M[1]+(M[2]?2:0),h=Math.min(cerr(a,j),tt),n=calc(a,j).to;return `<button class="imc" style="--c:${MCOL[j]}" onclick="go(${j})"><div class="imt"><span>${MEMO[j]}</span><b>${n!=null?F(n):'–'}</b></div><strong>${M[0]}</strong><div class="pb"><b style="width:${h/tt*100}%"></b></div><small>${h} de ${tt} evaluaciones</small></button>`}).join('');
  return `<div class="iw"><div class="rph">${ph?`<img src="${E(ph)}" referrerpolicy="no-referrer" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:''}<div class="ini" style="background:${cl};${ph?'display:none':''}">${E(ini(a))}</div></div><h1>Bienvenido: <span>${E(nom)}</span></h1></div>
  <div class="ic"><small>${E(top)}</small><h2>${E(t)}</h2>${pr||hoy.length?`<div class="pb"><b style="width:${pr}%"></b></div>`:''}${sub?`<p>${E(sub)}</p>`:''}</div>
